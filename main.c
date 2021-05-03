@@ -7,7 +7,7 @@ typedef struct
     char name[50];
     char category[25];
     char priority[4];
-    char status[2];
+    char status;
     int day;
     int month;
     int year;
@@ -26,20 +26,31 @@ void add(FILE *file[10])
     printf("Введите описание дела: ");
     fgets(task1.description, 100, stdin);
     printf("Введите статус выполнения('-' не начал, '~' в процессе)*: ");
-    scanf("%s", task1.status);
-    printf("Введите крайний срок(через пробел: день месяц год): ");
-    scanf("%d %d %d", &task1.day, &task1.month, &task1.year);
+    scanf("%c", &task1.status);
+    printf("Введите крайний срок(через пробел: день месяц год, 0 - если бессрочное): ");
+    scanf("%d", &task1.day);
+    if(task1.day == 0)
+    {
+        task1.month = 0;
+        task1.year = 0;
+    } else
+        scanf("%d %d", &task1.month, &task1.year);
     printf("Введите приоритет дела(* - низкий, ** - средний, *** - высокий)*: ");
     scanf("%s", task1.priority);
     printf("Введите категорию дела: ");
     fgetc(stdin);
     fgets(task1.category, 25, stdin);
-    printf("Введите прогресс выполнения: ");
-    scanf("%d", &task1.progress);
+    if(task1.status != 45)
+    {
+        printf("Введите прогресс выполнения: ");
+        scanf("%d", &task1.progress);
+    }
+    else
+        task1.progress = 0;
 
     fprintf(file[0], "%s|", task1.name);
     fprintf(file[0], "%s|", task1.description);
-    fprintf(file[0], "%s|", task1.status);
+    fprintf(file[0], "%d|", task1.status);
     fprintf(file[0], "%d|", task1.day);
     fprintf(file[0], "%d|", task1.month);
     fprintf(file[0], "%d|", task1.year);
