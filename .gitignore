@@ -1,4 +1,4 @@
 obj/*.o
 obj/*.a
 users/*.txt
-bin/*
+bin/todo
