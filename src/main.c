@@ -6,7 +6,7 @@ int main()
     
 
     FILE* file[10] = {NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL};
-    file[0] = fopen("users/user1.txt", "w+");
+    file[0] = fopen("users/user1.txt", "r+");
     do
     {
         printf("1. Список дел\n");

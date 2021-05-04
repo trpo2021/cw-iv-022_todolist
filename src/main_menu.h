@@ -25,3 +25,5 @@ int bin();
 int settings();
 
 void authors();
+
+int find_id(FILE *file);

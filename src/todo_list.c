@@ -3,6 +3,9 @@
 void add(FILE *file[10])
 {
     task task1;
+    int id = find_id(file[0]);
+    printf("%d\n", id);
+    fseek(file[0], 0, SEEK_END);
 
     setlocale(LC_ALL, "Russian");
     printf("'*' помечены обязательные пункты\n");
@@ -43,6 +46,7 @@ void add(FILE *file[10])
     else
         task1.progress = 0;
 
+    fprintf(file[0], "%d|", id++);
     fprintf(file[0], "%s|", task1.name);
     fprintf(file[0], "%s|", task1.description);
     fprintf(file[0], "%d|", task1.status);
@@ -53,3 +57,11 @@ void add(FILE *file[10])
     fprintf(file[0], "%s|", task1.category);
     fprintf(file[0], "%d|\n", task1.progress);
 }
+
+// void read_tasks(FILE *file[10])
+// {
+//     int id = find_id(file[0]) - 1;
+//     task *tasks = NULL;
+    
+//     tasks = malloc(sizeof(task) * id);
+// }

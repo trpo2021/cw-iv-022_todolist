@@ -67,3 +67,17 @@ void authors()
     printf("2. Конышев Архип\n");
     printf("3. Барашков Павел\n");
 }
+
+int find_id(FILE *file)
+{
+    char string[250];
+    int id = 0;
+
+    fseek(file, 0, SEEK_SET);
+    while(feof(file) == 0)
+    {
+        fgets(string, 250, file);
+        id++;
+    }
+    return id;
+}
