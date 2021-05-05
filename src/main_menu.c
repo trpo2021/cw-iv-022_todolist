@@ -31,11 +31,6 @@ void todolist(FILE *file[10])
             case 5:
                 break;
             case 6:
-                for(int i = 0; i < 10; i++)
-                {
-                    if((file[i] != NULL) && (file[i] != 0))
-                        fclose(file[i]);
-                }
                 break;
             case 7:
                 break;

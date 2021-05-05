@@ -68,10 +68,10 @@ void read_tasks(FILE *file)
     char string[250];
 
     fseek(file, 0, SEEK_SET);
-    while(feof(file) == 0)
+    while(!feof(file))
     {
-        fgets(string, 250, file);
-        printf("%s", string);
+        if(fgets(string, 250, file) != NULL)
+            printf("%s", string);
     }
 }
 
