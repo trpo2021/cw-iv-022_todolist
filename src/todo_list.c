@@ -47,16 +47,28 @@ void add(FILE *file[10])
     else
         task1.progress = 0;
 
-    fprintf(file[0], "%d|", id++);
-    fprintf(file[0], "%s|", task1.name);
-    fprintf(file[0], "%s|", task1.description);
-    fprintf(file[0], "%d|", task1.status);
-    fprintf(file[0], "%d|", task1.day);
-    fprintf(file[0], "%d|", task1.month);
-    fprintf(file[0], "%d|", task1.year);
-    fprintf(file[0], "%s|", task1.priority);
-    fprintf(file[0], "%s|", task1.category);
-    fprintf(file[0], "%d|\n", task1.progress);
+    char progress_bar[11] = "__________";
+    int progress_counter = 0;
+    int progress = task1.progress;
+    while(progress > 0)
+    {
+        progress -= 10;
+        progress_counter++;
+    }
+
+    for (int i = 0; i < progress_counter; ++i)
+    {
+        progress_bar[i] = '*';
+    }
+
+    fprintf(file[0], "%-2d|", id++);
+    fprintf(file[0], "%-30s|", task1.name);
+    fprintf(file[0], "%-80s|", task1.description);
+    fprintf(file[0], "  %-c  |", task1.status);
+    fprintf(file[0], "%2d.%2d.%4d|", task1.day, task1.month, task1.year);
+    fprintf(file[0], "   %-3s   |", task1.priority);
+    fprintf(file[0], "%-20s|", task1.category);
+    fprintf(file[0], "%-s (%d%%)|\n", progress_bar, task1.progress);
 }
 
 void read_tasks(FILE *file)

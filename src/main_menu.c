@@ -7,7 +7,9 @@ void todolist(FILE *file[10])
     do
     {
         indent();
+        printf("id            Название                                                  Описание                                  Статус    Дата    Приоритет       Категория          Прогресс\n");
         read_tasks(file[0]);
+        printf("\n");
         printf("1. Добавление\n");
         printf("2. Перемещение в корзину\n");
         printf("3. Редактирование\n");
