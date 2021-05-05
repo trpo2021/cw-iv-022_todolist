@@ -6,6 +6,8 @@ void todolist(FILE *file[10])
     
     do
     {
+        indent();
+        read_tasks(file[0]);
         printf("1. Добавление\n");
         printf("2. Перемещение в корзину\n");
         printf("3. Редактирование\n");
@@ -66,18 +68,4 @@ void authors()
     printf("1. Машкалев Роман\n");
     printf("2. Конышев Архип\n");
     printf("3. Барашков Павел\n");
-}
-
-int find_id(FILE *file)
-{
-    char string[250];
-    int id = 0;
-
-    fseek(file, 0, SEEK_SET);
-    while(feof(file) == 0)
-    {
-        fgets(string, 250, file);
-        id++;
-    }
-    return id;
 }

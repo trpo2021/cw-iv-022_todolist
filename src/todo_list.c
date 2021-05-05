@@ -1,12 +1,13 @@
 #include "main_menu.h"
+#include "todo_list.h"
 
 void add(FILE *file[10])
 {
     task task1;
     int id = find_id(file[0]);
-    printf("%d\n", id);
     fseek(file[0], 0, SEEK_END);
 
+    indent();
     setlocale(LC_ALL, "Russian");
     printf("'*' помечены обязательные пункты\n");
     printf("Введите название дела*: ");
@@ -58,10 +59,38 @@ void add(FILE *file[10])
     fprintf(file[0], "%d|\n", task1.progress);
 }
 
-// void read_tasks(FILE *file[10])
-// {
-//     int id = find_id(file[0]) - 1;
-//     task *tasks = NULL;
+void read_tasks(FILE *file)
+{
+    // int id = find_id(file[0]) - 1;
+    // task *tasks = NULL;
     
-//     tasks = malloc(sizeof(task) * id);
-// }
+    // tasks = malloc(sizeof(task) * id);
+    char string[250];
+
+    fseek(file, 0, SEEK_SET);
+    while(feof(file) == 0)
+    {
+        fgets(string, 250, file);
+        printf("%s", string);
+    }
+}
+
+int find_id(FILE *file)
+{
+    char string[250];
+    int id = 0;
+
+    fseek(file, 0, SEEK_SET);
+    while(feof(file) == 0)
+    {
+        fgets(string, 250, file);
+        id++;
+    }
+    return id;
+}
+
+void indent()
+{
+    for(int i = 0; i < 20; i++)
+        printf("\n");
+}
