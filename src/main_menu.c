@@ -6,6 +6,10 @@ void todolist(FILE *file[10])
     
     do
     {
+        indent();
+        printf("id            Название                                                  Описание                                  Статус    Дата    Приоритет       Категория          Прогресс\n");
+        read_tasks(file[0]);
+        printf("\n");
         printf("1. Добавление\n");
         printf("2. Перемещение в корзину\n");
         printf("3. Редактирование\n");
@@ -29,11 +33,6 @@ void todolist(FILE *file[10])
             case 5:
                 break;
             case 6:
-                for(int i = 0; i < 10; i++)
-                {
-                    if((file[i] != NULL) && (file[i] != 0))
-                        fclose(file[i]);
-                }
                 break;
             case 7:
                 break;

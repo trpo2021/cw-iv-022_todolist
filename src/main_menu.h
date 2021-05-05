@@ -5,9 +5,9 @@
 
 typedef struct
 {
-    char description[100];
-    char name[50];
-    char category[25];
+    char description[80];
+    char name[25];
+    char category[20];
     char priority[4];
     char status;
     int day;

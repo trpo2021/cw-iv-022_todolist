@@ -1,4 +1,5 @@
 #include "main_menu.h"
+#include "todo_list.h"
 
 int main()
 {
@@ -6,9 +7,10 @@ int main()
     
 
     FILE* file[10] = {NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL};
-    file[0] = fopen("users/user1.txt", "w+");
+    file[0] = fopen("users/user1.txt", "r+");
     do
     {
+        indent();
         printf("1. Список дел\n");
         printf("2. Архив\n");
         printf("3. Корзина\n");
