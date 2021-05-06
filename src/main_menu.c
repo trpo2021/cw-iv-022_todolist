@@ -2,11 +2,10 @@
 
 void todolist(FILE *file[10])
 {
-    int number;
+    int number, id;
     
     do
     {
-        indent();
         printf("id            Название                                                  Описание                                  Статус    Дата    Приоритет       Категория          Прогресс\n");
         read_tasks(file[0]);
         printf("\n");
@@ -27,6 +26,9 @@ void todolist(FILE *file[10])
             case 2:
                 break;
             case 3:
+                printf("Введите номер дела: ");
+                scanf("%d", &id);
+                edit(file[0], id);
                 break;
             case 4:
                 break;

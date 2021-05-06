@@ -10,3 +10,5 @@ int find_id(FILE *file);
 void read_tasks(FILE *file);
 
 void indent();
+
+void edit(FILE *file, int id);

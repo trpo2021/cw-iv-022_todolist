@@ -6,10 +6,11 @@
 typedef struct
 {
     char description[80];
-    char name[25];
+    char name[30];
     char category[20];
     char priority[4];
     char status;
+    int id;
     int day;
     int month;
     int year;
