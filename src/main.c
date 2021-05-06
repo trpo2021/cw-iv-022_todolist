@@ -8,6 +8,8 @@ int main()
 
     FILE* file[10] = {NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL};
     file[0] = fopen("users/user1.txt", "r+");
+    if(file[0] == NULL)
+        file[0] = fopen("users/user1.txt", "w+");
     do
     {
         indent();
