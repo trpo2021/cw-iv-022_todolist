@@ -65,7 +65,10 @@ void add(FILE *file[10])
     fprintf(file[0], "%-30s|", task1.name);
     fprintf(file[0], "%-80s|", task1.description);
     fprintf(file[0], "  %-c  |", task1.status);
-    fprintf(file[0], "%2d.%2d.%4d|", task1.day, task1.month, task1.year);
+    if(task1.day == 0)
+    	fprintf(file[0], "Бессрочное|");
+    else
+    	fprintf(file[0], "%2d.%2d.%4d|", task1.day, task1.month, task1.year);
     fprintf(file[0], "   %-3s   |", task1.priority);
     fprintf(file[0], "%-20s|", task1.category);
     fprintf(file[0], "%-s (%d%%)|\n", progress_bar, task1.progress);
