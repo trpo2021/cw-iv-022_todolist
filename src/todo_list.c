@@ -73,10 +73,6 @@ void add(FILE *file[10])
 
 void read_tasks(FILE *file)
 {
-    // int id = find_id(file[0]) - 1;
-    // task *tasks = NULL;
-    
-    // tasks = malloc(sizeof(task) * id);
     char string[250];
 
     fseek(file, 0, SEEK_SET);
