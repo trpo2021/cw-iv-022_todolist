@@ -230,7 +230,6 @@ void edit(FILE *file, int id)
         task1.id = (c - 48) * 10;
     c = fgetc(file);
     task1.id += (c - 48);
-    printf("%d\n", task1.id);
 
     for(i = 0; i < 29; i++)
         task1.name[i] = 32;
@@ -269,7 +268,6 @@ void edit(FILE *file, int id)
     task1.month = 0;
     task1.year = 0;
     c = fgetc(file);
-    printf("%d", c);
     if(c != 45)
     {
         if(c != 32)
@@ -315,9 +313,6 @@ void edit(FILE *file, int id)
     task1.priority[3] = '\0';
 
     fseek(file, 4, SEEK_CUR);
-
-    // for(i = 0; i < 19; i++)
-    //     task1.category[i] = 32;
     
     c = fgetc(file);
     j = 0;
@@ -345,17 +340,6 @@ void edit(FILE *file, int id)
         task1.progress = ((c - 48) * 100) + ((v - 48) * 10) + (b - 48);
     
     int number;
-    printf("%2d|", task1.id);
-    printf("%-30s|", task1.name);
-    printf("%-80s|", task1.description);
-    printf("  %-c  |", task1.status);
-    printf("%2d.", task1.day);
-    printf("%2d.", task1.month);
-    printf("%4d|", task1.year);
-    printf("   %3s   |", task1.priority);
-    printf("%-20s|", task1.category);
-    printf("%d|", task1.progress);
-    printf("\n");
     do
     {
     	printf("1. Изменить название\n");
@@ -396,15 +380,4 @@ void edit(FILE *file, int id)
     } while (number != 8);
     replacement(file, &task1, id);
 
-    printf("%d|", task1.id);
-    printf("%s|", task1.name);
-    printf("%s|", task1.description);
-    printf("%c|", task1.status);
-    printf("%d.", task1.day);
-    printf("%d.", task1.month);
-    printf("%d|", task1.year);
-    printf("%s|", task1.priority);
-    printf("%s|", task1.category);
-    printf("%d|", task1.progress);
-    printf("\n");
 }
