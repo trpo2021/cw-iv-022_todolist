@@ -3,19 +3,6 @@
 #include <stdio.h>
 #include <locale.h>
 
-typedef struct
-{
-    char description[80];
-    char name[25];
-    char category[20];
-    char priority[4];
-    char status;
-    int day;
-    int month;
-    int year;
-    int progress;
-} task;
-
 void todolist(FILE *file[10]);
 
 int archive();

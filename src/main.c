@@ -12,7 +12,6 @@ int main()
         file[0] = fopen("users/user1.txt", "w+");
     do
     {
-        indent();
         printf("1. Список дел\n");
         printf("2. Архив\n");
         printf("3. Корзина\n");
