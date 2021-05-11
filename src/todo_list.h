@@ -9,11 +9,11 @@ typedef struct {
     char category[20];
     char priority[4];
     char status;
-    int id;
-    int day;
-    int month;
-    int year;
-    int progress;
+    unsigned int id;
+    unsigned int day;
+    unsigned int month;
+    unsigned int year;
+    unsigned int progress;
 } task;
 
 void add(FILE* file[10]);

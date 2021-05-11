@@ -6,57 +6,23 @@ void add(FILE* file[10])
     task task1;
     int id = find_id(file[0]);
     fseek(file[0], 0, SEEK_END);
-
-    // indent();
     setlocale(LC_ALL, "Russian");
+
     printf("'*' помечены обязательные пункты\n");
-    printf("Введите название дела*: ");
-    fgetc(stdin);
-    fgets(task1.name, 30, stdin);
-    while (getchar() != '\n')
-        ;
-    for (int i = 0; i < 30; i++)
-        if (task1.name[i] == 10)
-            task1.name[i] = 32;
-    printf("Введите описание дела: ");
-    fgets(task1.description, 80, stdin);
-    for (int i = 0; i < 80; i++)
-        if (task1.description[i] == 10)
-            task1.description[i] = 32;
-    while (getchar() != '\n')
-        ;
-    printf("Введите статус выполнения('-' не начал, '~' в процессе)*: ");
-    scanf("%c", &task1.status);
-    while (getchar() != '\n')
-        ;
-    printf("Введите крайний срок(через пробел: день месяц год, 0 - если "
-           "бессрочное): ");
-    scanf("%d", &task1.day);
-    if (task1.day == 0) {
-        task1.month = 0;
-        task1.year = 0;
-    } else
-        scanf("%d %d", &task1.month, &task1.year);
-    while (getchar() != '\n')
-        ;
-    printf("Введите приоритет дела(* - низкий, ** - средний, *** - "
-           "высокий)*: ");
-    scanf("%s", task1.priority);
-    while (getchar() != '\n')
-        ;
-    printf("Введите категорию дела: ");
-    fgetc(stdin);
-    fgets(task1.category, 20, stdin);
-    for (int i = 0; i < 20; i++)
-        if (task1.category[i] == 10)
-            task1.category[i] = 32;
-    if (task1.status != 45) {
-        printf("Введите прогресс выполнения: ");
-        scanf("%d", &task1.progress);
-    } else
-        task1.progress = 0;
-    while (getchar() != '\n')
-        ;
+    name_edit(&task1);
+
+    description_edit(&task1);
+
+    status_edit(&task1);
+
+    deadline_edit(&task1);
+
+    priority_edit(&task1);
+    
+    category_edit(&task1);
+    
+    progress_edit(&task1);
+
     char progress_bar[11] = "__________";
     int progress_counter = 0;
     int progress = task1.progress;
@@ -106,76 +72,123 @@ int find_id(FILE* file)
     return id;
 }
 
-void indent()
-{
-    for (int i = 0; i < 20; i++)
-        printf("\n");
-}
-
 void name_edit(task* task1)
 {
+    int count = 0;
     printf("Введите название дела*: ");
     fgetc(stdin);
     fgets(task1->name, 30, stdin);
+
     for (int i = 0; i < 30; i++)
+    {
         if (task1->name[i] == 10)
-            task1->name[i] = 0;
+            task1->name[i] = 32;
+        if (task1->name[i] == 32)
+            count++;
+    }
+    if (count == 0)
+        while (getchar() != '\n');
 }
 
 void description_edit(task* task1)
 {
-    printf("Введите описание дела*: ");
-    fgetc(stdin);
+    int count = 0;
+    printf("Введите описание дела: ");
     fgets(task1->description, 80, stdin);
     for (int i = 0; i < 80; i++)
+    {
         if (task1->description[i] == 10)
-            task1->description[i] = 0;
+            task1->description[i] = 32;
+        if (task1->description[i] == 32)
+            count++;
+    }
+    if (count == 0)
+        while (getchar() != '\n');
 }
 
 void status_edit(task* task1)
 {
     printf("Введите статус выполнения('-' не начал, '~' в процессе)*: ");
-    fgetc(stdin);
     scanf("%c", &task1->status);
+    while (getchar() != '\n');
 }
 
 void deadline_edit(task* task1)
 {
     printf("Введите крайний срок(через пробел: день месяц год, 0 - если "
            "бессрочное): ");
-    fgetc(stdin);
     scanf("%d", &task1->day);
+    while(task1->day > 31)
+    {
+        printf("Введите корректную дату(день): ");
+        scanf("%d", &task1->day);
+    }
     if (task1->day == 0) {
         task1->month = 0;
         task1->year = 0;
-    } else
-        scanf("%d %d", &task1->month, &task1->year);
+    } else {
+        printf("Введите месяц: ");
+        scanf("%d", &task1->month);
+        while(task1->month > 12)
+        {
+            printf("Введите корректную дату(месяц): ");
+            scanf("%d", &task1->month);
+        }
+        printf("Введите год: ");
+        scanf("%d", &task1->year);
+        while((task1->year > 9999) || (task1->year < 1000))
+        {
+            printf("Введите корректную дату(год): ");
+            scanf("%d", &task1->year);
+        }
+    }
 }
 
 void priority_edit(task* task1)
 {
+    int count = 0;
+
     printf("Введите приоритет дела(* - низкий, ** - средний, *** - "
            "высокий)*: ");
     fgetc(stdin);
-    scanf("%s", task1->priority);
+    fgets(task1->priority, 4, stdin);
+    for (int i = 0; i < 4; i++)
+    {
+        if (task1->priority[i] == 10)
+            task1->priority[i] = 32;
+        if (task1->priority[i] == 32)
+            count++;
+    }
+    if (count == 0)
+        while (getchar() != '\n');
 }
 
 void category_edit(task* task1)
 {
+    int count = 0;
     printf("Введите категорию дела: ");
-    fgetc(stdin);
     fgets(task1->category, 20, stdin);
     for (int i = 0; i < 20; i++)
+    {
         if (task1->category[i] == 10)
-            task1->category[i] = 0;
+            task1->category[i] = 32;
+        if (task1->category[i] == 32)
+            count++;
+    }
+    if (count == 0)
+        while (getchar() != '\n');
 }
 
 void progress_edit(task* task1)
 {
     if (task1->status != 45) {
-        printf("Введите прогресс выполнения: ");
-        fgetc(stdin);
+        printf("Введите прогресс выполнения(в процентах): ");
         scanf("%d", &task1->progress);
+        while(task1->progress > 100)
+        {
+            printf("Введите корректный прогресс выполнения(в процентах): ");
+            scanf("%d", &task1->progress);
+        }
     } else
         task1->progress = 0;
 }
