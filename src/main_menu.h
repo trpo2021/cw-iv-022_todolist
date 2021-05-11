@@ -1,9 +1,9 @@
 #pragma once
 
-#include <stdio.h>
 #include <locale.h>
+#include <stdio.h>
 
-void todolist(FILE *file[10]);
+void todolist(FILE* file[10]);
 
 int archive();
 

@@ -1,12 +1,13 @@
 #include "todo_list.h"
 
-void todolist(FILE *file[10])
+void todolist(FILE* file[10])
 {
     int number, id;
-    
-    do
-    {
-        printf("id            Название                                                  Описание                                  Статус    Дата    Приоритет       Категория          Прогресс\n");
+
+    do {
+        printf("id            Название                                         "
+               "         Описание                                  Статус    "
+               "Дата    Приоритет       Категория          Прогресс\n");
         read_tasks(file[0]);
         printf("\n");
         printf("1. Добавление\n");
@@ -18,47 +19,43 @@ void todolist(FILE *file[10])
         printf("7. Дублирование\n");
         printf("8. Выход в главное меню\n");
         scanf("%d", &number);
-        switch(number)
-        {
-            case 1:
-                add(file);
-                break;
-            case 2:
-                break;
-            case 3:
-                printf("Введите номер дела: ");
-                scanf("%d", &id);
-                edit(file[0], id);
-                break;
-            case 4:
-                break;
-            case 5:
-                break;
-            case 6:
-                break;
-            case 7:
-                break;
-            case 8:
-                break;
+        switch (number) {
+        case 1:
+            add(file);
+            break;
+        case 2:
+            break;
+        case 3:
+            printf("Введите номер дела: ");
+            scanf("%d", &id);
+            edit(file[0], id);
+            break;
+        case 4:
+            break;
+        case 5:
+            break;
+        case 6:
+            break;
+        case 7:
+            break;
+        case 8:
+            break;
         }
     } while (number != 8);
 }
 
 int archive()
 {
-
     return 0;
 }
 
 int bin()
 {
-
     return 0;
 }
 
 int settings()
 {
-
     return 0;
 }
 
