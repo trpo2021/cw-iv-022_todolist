@@ -115,7 +115,7 @@ void status_edit(task* task1)
     printf("Введите статус выполнения('-' не начал, '~' в процессе)*: ");
     task1->status = getchar();
     printf("%c", task1->status);
-    if(task1->status == '\n')
+    if (task1->status == '\n')
         task1->status = 32;
     while (getchar() != '\n')
         ;
