@@ -1,5 +1,5 @@
-#include "todo_list.h"
 #include "bin.h"
+#include "todo_list.h"
 
 void bin_of_tasks(FILE* file[10])
 {
@@ -44,15 +44,14 @@ void delete_task(FILE* file[10], int id)
     const int number = find_id(file[1]) - 1;
     task tasks[number];
 
-    for(int i = 0; i < number; i++)
+    for (int i = 0; i < number; i++)
         task_scan(file[1], &tasks[i], (i + 1));
 
     file[1] = fopen("users/user1bin.txt", "w+");
 
-    for(int i = 0; i < number; i++)
-    {
+    for (int i = 0; i < number; i++) {
         int bin_id = find_id(file[1]);
-        if(i != (id - 1))
+        if (i != (id - 1))
             write_in_file(file[1], &tasks[i], bin_id);
     }
 }
@@ -67,7 +66,7 @@ void restore_from_bin(FILE* file[10], int id)
     const int number = find_id(file[1]) - 1;
     task tasks[number];
 
-    for(int i = 0; i < number; i++)
+    for (int i = 0; i < number; i++)
         task_scan(file[1], &tasks[i], (i + 1));
 
     int bin_id = find_id(file[0]);
@@ -75,10 +74,9 @@ void restore_from_bin(FILE* file[10], int id)
 
     file[1] = fopen("users/user1.txt", "w+");
 
-    for(int i = 0; i < number; i++)
-    {
+    for (int i = 0; i < number; i++) {
         bin_id = find_id(file[1]);
-        if(i != (id - 1))
+        if (i != (id - 1))
             write_in_file(file[1], &tasks[i], bin_id);
     }
 }

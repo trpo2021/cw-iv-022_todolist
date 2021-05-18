@@ -388,7 +388,7 @@ void move_to_bin(FILE* file[10], int id)
     const int number = find_id(file[0]) - 1;
     task tasks[number];
 
-    for(int i = 0; i < number; i++)
+    for (int i = 0; i < number; i++)
         task_scan(file[0], &tasks[i], (i + 1));
 
     int bin_id = find_id(file[1]);
@@ -396,10 +396,9 @@ void move_to_bin(FILE* file[10], int id)
 
     file[0] = fopen("users/user1.txt", "w+");
 
-    for(int i = 0; i < number; i++)
-    {
+    for (int i = 0; i < number; i++) {
         bin_id = find_id(file[0]);
-        if(i != (id - 1))
+        if (i != (id - 1))
             write_in_file(file[0], &tasks[i], bin_id);
     }
 }
