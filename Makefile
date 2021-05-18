@@ -1,12 +1,17 @@
+OFLAGS=gcc -Wall -c -Werror -o
+BINFLAGS=gcc -Wall -Werror -o
+
 all: bin/todo
-bin/todo: obj/main_menu.o obj/main.o obj/todo_list.o
-	gcc -Wall -Werror -o bin/todo obj/main.o obj/main_menu.o obj/todo_list.o
+bin/todo: obj/main_menu.o obj/main.o obj/todo_list.o obj/bin.o
+	$(BINFLAGS) $@ $^
 obj/main_menu.o: src/main_menu.c
-	gcc -Wall -c -Werror -o obj/main_menu.o src/main_menu.c
+	$(OFLAGS) $@ $^
 obj/main.o: src/main.c
-	gcc -Wall -c -Werror -o obj/main.o src/main.c
+	$(OFLAGS) $@ $^
 obj/todo_list.o: src/todo_list.c
-	gcc -Wall -c -Werror -o obj/todo_list.o src/todo_list.c
+	$(OFLAGS) $@ $^
+obj/bin.o: src/bin.c
+	$(OFLAGS) $@ $^
 
 .PHONY : clean
 clean:

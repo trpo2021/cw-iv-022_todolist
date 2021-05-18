@@ -23,9 +23,14 @@ void add(FILE* file[10])
 
     progress_edit(&task1);
 
+    write_in_file(file[0], &task1, id);
+}
+
+void write_in_file(FILE* file, task* task1, int id)
+{
     char progress_bar[11] = "__________";
     int progress_counter = 0;
-    int progress = task1.progress;
+    int progress = task1->progress;
     while (progress > 0) {
         progress -= 10;
         progress_counter++;
@@ -34,18 +39,17 @@ void add(FILE* file[10])
     for (int i = 0; i < progress_counter; ++i) {
         progress_bar[i] = '*';
     }
-
-    fprintf(file[0], "%2d|", id++);
-    fprintf(file[0], "%-30s|", task1.name);
-    fprintf(file[0], "%-80s|", task1.description);
-    fprintf(file[0], "  %-c  |", task1.status);
-    if (task1.day == 0)
-        fprintf(file[0], "----------|");
+    fprintf(file, "%2d|", id++);
+    fprintf(file, "%-30s|", task1->name);
+    fprintf(file, "%-80s|", task1->description);
+    fprintf(file, "  %-c  |", task1->status);
+    if (task1->day == 0)
+        fprintf(file, "----------|");
     else
-        fprintf(file[0], "%2d.%2d.%4d|", task1.day, task1.month, task1.year);
-    fprintf(file[0], "   %-3s   |", task1.priority);
-    fprintf(file[0], "%-20s|", task1.category);
-    fprintf(file[0], "%-s (%d%%)|\n", progress_bar, task1.progress);
+        fprintf(file, "%2d.%2d.%4d|", task1->day, task1->month, task1->year);
+    fprintf(file, "   %-3s   |", task1->priority);
+    fprintf(file, "%-20s|", task1->category);
+    fprintf(file, "%-s (%d%%)|\n", progress_bar, task1->progress);
 }
 
 void read_tasks(FILE* file)
@@ -109,7 +113,9 @@ void description_edit(task* task1)
 void status_edit(task* task1)
 {
     printf("Введите статус выполнения('-' не начал, '~' в процессе)*: ");
-    scanf("%c", &task1->status);
+    task1->status = getchar();
+    if (task1->status == '\n')
+        task1->status = 32;
     while (getchar() != '\n')
         ;
 }
@@ -199,34 +205,13 @@ void replacement(FILE* file, task* task1, int id)
     if (id > 1)
         for (i = 0; i < id - 1; i++)
             fgets(string, 250, file);
-    char progress_bar[11] = "__________";
-    int progress_counter = 0;
-    int progress = task1->progress;
-    while (progress > 0) {
-        progress -= 10;
-        progress_counter++;
-    }
 
-    for (int i = 0; i < progress_counter; ++i) {
-        progress_bar[i] = '*';
-    }
-    fprintf(file, "%2d|", id++);
-    fprintf(file, "%-30s|", task1->name);
-    fprintf(file, "%-80s|", task1->description);
-    fprintf(file, "  %-c  |", task1->status);
-    if (task1->day == 0)
-        fprintf(file, "----------|");
-    else
-        fprintf(file, "%2d.%2d.%4d|", task1->day, task1->month, task1->year);
-    fprintf(file, "   %3s   |", task1->priority);
-    fprintf(file, "%-20s|", task1->category);
-    fprintf(file, "%-s (%d%%)|\n", progress_bar, task1->progress);
+    write_in_file(file, task1, id);
 }
 
-void edit(FILE* file, int id)
+void task_scan(FILE* file, task* task1, int id)
 {
     setlocale(LC_ALL, "Russian");
-    task task1;
     char c = 0, v = 0, b = 0;
     char string[250];
     int i = 0, j = 0;
@@ -236,99 +221,99 @@ void edit(FILE* file, int id)
         for (i = 0; i < id - 1; i++)
             fgets(string, 250, file);
 
-    task1.id = 0;
+    task1->id = 0;
 
     c = fgetc(file);
     if (c != 32)
-        task1.id = (c - 48) * 10;
+        task1->id = (c - 48) * 10;
     c = fgetc(file);
-    task1.id += (c - 48);
+    task1->id += (c - 48);
 
     for (i = 0; i < 29; i++)
-        task1.name[i] = 32;
+        task1->name[i] = 32;
 
     fseek(file, 1, SEEK_CUR);
     j = 0;
     c = fgetc(file);
     while (c != 124) {
-        task1.name[j] = c;
+        task1->name[j] = c;
         j++;
         c = fgetc(file);
     }
 
-    task1.name[29] = '\0';
+    task1->name[29] = '\0';
 
     for (i = 0; i < 79; i++)
-        task1.description[i] = 32;
+        task1->description[i] = 32;
 
     c = fgetc(file);
     j = 0;
     while (c != 124) {
-        task1.description[j] = c;
+        task1->description[j] = c;
         j++;
         c = fgetc(file);
     }
-    task1.description[79] = '\0';
+    task1->description[79] = '\0';
 
     fseek(file, 2, SEEK_CUR);
     c = fgetc(file);
-    task1.status = c;
+    task1->status = c;
 
     fseek(file, 3, SEEK_CUR);
-    task1.day = 0;
-    task1.month = 0;
-    task1.year = 0;
+    task1->day = 0;
+    task1->month = 0;
+    task1->year = 0;
     c = fgetc(file);
     if (c != 45) {
         if (c != 32)
-            task1.day = (c - 48) * 10;
+            task1->day = (c - 48) * 10;
         c = fgetc(file);
-        task1.day += (c - 48);
+        task1->day += (c - 48);
         c = fgetc(file);
         c = fgetc(file);
         if (c != 32)
-            task1.month = (c - 48) * 10;
+            task1->month = (c - 48) * 10;
         c = fgetc(file);
-        task1.month += (c - 48);
+        task1->month += (c - 48);
         c = fgetc(file);
         c = fgetc(file);
-        task1.year += (c - 48) * 1000;
+        task1->year += (c - 48) * 1000;
         c = fgetc(file);
-        task1.year += (c - 48) * 100;
+        task1->year += (c - 48) * 100;
         c = fgetc(file);
-        task1.year += (c - 48) * 10;
+        task1->year += (c - 48) * 10;
         c = fgetc(file);
-        task1.year += (c - 48);
+        task1->year += (c - 48);
         fseek(file, 4, SEEK_CUR);
     } else {
         fseek(file, 13, SEEK_CUR);
-        task1.month = 0;
-        task1.day = 0;
-        task1.year = 0;
+        task1->month = 0;
+        task1->day = 0;
+        task1->year = 0;
     }
 
     c = fgetc(file);
-    task1.priority[0] = c;
+    task1->priority[0] = c;
     c = fgetc(file);
-    task1.priority[1] = c;
-    if (task1.priority[1] != 42)
-        task1.priority[1] = 32;
+    task1->priority[1] = c;
+    if (task1->priority[1] != 42)
+        task1->priority[1] = 32;
     c = fgetc(file);
-    task1.priority[2] = c;
-    if (task1.priority[2] != 42)
-        task1.priority[2] = 32;
-    task1.priority[3] = '\0';
+    task1->priority[2] = c;
+    if (task1->priority[2] != 42)
+        task1->priority[2] = 32;
+    task1->priority[3] = '\0';
 
     fseek(file, 4, SEEK_CUR);
 
     c = fgetc(file);
     j = 0;
     while (c != 124) {
-        task1.category[j] = c;
+        task1->category[j] = c;
         j++;
         c = fgetc(file);
     }
-    task1.category[19] = '\0';
+    task1->category[19] = '\0';
 
     fseek(file, 12, SEEK_CUR);
 
@@ -336,14 +321,21 @@ void edit(FILE* file, int id)
     v = fgetc(file);
     b = fgetc(file);
 
-    task1.progress = 0;
+    task1->progress = 0;
 
     if (c == 48)
-        task1.progress = 0;
+        task1->progress = 0;
     else if (b == 37)
-        task1.progress = (c - 48) * 10 + (v - 48);
+        task1->progress = (c - 48) * 10 + (v - 48);
     else
-        task1.progress = ((c - 48) * 100) + ((v - 48) * 10) + (b - 48);
+        task1->progress = ((c - 48) * 100) + ((v - 48) * 10) + (b - 48);
+}
+
+void edit(FILE* file, int id)
+{
+    task task1;
+
+    task_scan(file, &task1, id);
 
     int number;
     do {
@@ -358,24 +350,30 @@ void edit(FILE* file, int id)
         scanf("%d", &number);
         switch (number) {
         case 1:
+            getchar();
             name_edit(&task1);
             break;
         case 2:
+            getchar();
             description_edit(&task1);
             break;
         case 3:
+            getchar();
             status_edit(&task1);
             break;
         case 4:
+            getchar();
             deadline_edit(&task1);
             break;
         case 5:
             priority_edit(&task1);
             break;
         case 6:
+            getchar();
             category_edit(&task1);
             break;
         case 7:
+            getchar();
             progress_edit(&task1);
             break;
         case 8:
@@ -383,4 +381,24 @@ void edit(FILE* file, int id)
         }
     } while (number != 8);
     replacement(file, &task1, id);
+}
+
+void move_to_bin(FILE* file[10], int id)
+{
+    const int number = find_id(file[0]) - 1;
+    task tasks[number];
+
+    for (int i = 0; i < number; i++)
+        task_scan(file[0], &tasks[i], (i + 1));
+
+    int bin_id = find_id(file[1]);
+    write_in_file(file[1], &tasks[id - 1], bin_id);
+
+    file[0] = fopen("users/user1.txt", "w+");
+
+    for (int i = 0; i < number; i++) {
+        bin_id = find_id(file[0]);
+        if (i != (id - 1))
+            write_in_file(file[0], &tasks[i], bin_id);
+    }
 }

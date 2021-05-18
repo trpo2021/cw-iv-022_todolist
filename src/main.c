@@ -8,8 +8,11 @@ int main()
     FILE* file[10]
             = {NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL};
     file[0] = fopen("users/user1.txt", "r+");
+    file[1] = fopen("users/user1bin.txt", "r+");
     if (file[0] == NULL)
         file[0] = fopen("users/user1.txt", "w+");
+    if (file[1] == NULL)
+        file[1] = fopen("users/user1bin.txt", "w+");
     do {
         printf("1. Список дел\n");
         printf("2. Архив\n");
@@ -26,7 +29,7 @@ int main()
             archive();
             break;
         case 3:
-            bin();
+            bin_of_tasks(file);
             break;
         case 4:
             settings();

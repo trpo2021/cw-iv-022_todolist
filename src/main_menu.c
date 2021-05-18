@@ -24,6 +24,9 @@ void todolist(FILE* file[10])
             add(file);
             break;
         case 2:
+            printf("Введите номер дела: ");
+            scanf("%d", &id);
+            move_to_bin(file, id);
             break;
         case 3:
             printf("Введите номер дела: ");
