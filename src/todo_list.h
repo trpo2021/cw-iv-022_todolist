@@ -45,3 +45,5 @@ void replacement(FILE* file, task* task1, int id);
 void write_in_file(FILE* file, task* task1, int id);
 
 void task_scan(FILE* file, task* task1, int id);
+
+void move_to_bin(FILE* file[10], int id);

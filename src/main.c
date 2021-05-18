@@ -29,7 +29,7 @@ int main()
             archive();
             break;
         case 3:
-            bin();
+            bin_of_tasks(file);
             break;
         case 4:
             settings();
