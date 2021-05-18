@@ -23,9 +23,14 @@ void add(FILE* file[10])
 
     progress_edit(&task1);
 
+    write_in_file(file[0], &task1, id);
+}
+
+void write_in_file(FILE* file, task* task1, int id)
+{
     char progress_bar[11] = "__________";
     int progress_counter = 0;
-    int progress = task1.progress;
+    int progress = task1->progress;
     while (progress > 0) {
         progress -= 10;
         progress_counter++;
@@ -34,18 +39,17 @@ void add(FILE* file[10])
     for (int i = 0; i < progress_counter; ++i) {
         progress_bar[i] = '*';
     }
-
-    fprintf(file[0], "%2d|", id++);
-    fprintf(file[0], "%-30s|", task1.name);
-    fprintf(file[0], "%-80s|", task1.description);
-    fprintf(file[0], "  %-c  |", task1.status);
-    if (task1.day == 0)
-        fprintf(file[0], "----------|");
+    fprintf(file, "%2d|", id++);
+    fprintf(file, "%-30s|", task1->name);
+    fprintf(file, "%-80s|", task1->description);
+    fprintf(file, "  %-c  |", task1->status);
+    if (task1->day == 0)
+        fprintf(file, "----------|");
     else
-        fprintf(file[0], "%2d.%2d.%4d|", task1.day, task1.month, task1.year);
-    fprintf(file[0], "   %-3s   |", task1.priority);
-    fprintf(file[0], "%-20s|", task1.category);
-    fprintf(file[0], "%-s (%d%%)|\n", progress_bar, task1.progress);
+        fprintf(file, "%2d.%2d.%4d|", task1->day, task1->month, task1->year);
+    fprintf(file, "   %-3s   |", task1->priority);
+    fprintf(file, "%-20s|", task1->category);
+    fprintf(file, "%-s (%d%%)|\n", progress_bar, task1->progress);
 }
 
 void read_tasks(FILE* file)
@@ -202,28 +206,8 @@ void replacement(FILE* file, task* task1, int id)
     if (id > 1)
         for (i = 0; i < id - 1; i++)
             fgets(string, 250, file);
-    char progress_bar[11] = "__________";
-    int progress_counter = 0;
-    int progress = task1->progress;
-    while (progress > 0) {
-        progress -= 10;
-        progress_counter++;
-    }
 
-    for (int i = 0; i < progress_counter; ++i) {
-        progress_bar[i] = '*';
-    }
-    fprintf(file, "%2d|", id++);
-    fprintf(file, "%-30s|", task1->name);
-    fprintf(file, "%-80s|", task1->description);
-    fprintf(file, "  %-c  |", task1->status);
-    if (task1->day == 0)
-        fprintf(file, "----------|");
-    else
-        fprintf(file, "%2d.%2d.%4d|", task1->day, task1->month, task1->year);
-    fprintf(file, "   %3s   |", task1->priority);
-    fprintf(file, "%-20s|", task1->category);
-    fprintf(file, "%-s (%d%%)|\n", progress_bar, task1->progress);
+    write_in_file(file, task1, id);
 }
 
 void task_scan(FILE* file, task* task1, int id)
@@ -366,9 +350,11 @@ void edit(FILE* file, int id)
         scanf("%d", &number);
         switch (number) {
         case 1:
+            getchar();
             name_edit(&task1);
             break;
         case 2:
+            getchar();
             description_edit(&task1);
             break;
         case 3:
@@ -376,15 +362,18 @@ void edit(FILE* file, int id)
             status_edit(&task1);
             break;
         case 4:
+            getchar();
             deadline_edit(&task1);
             break;
         case 5:
             priority_edit(&task1);
             break;
         case 6:
+            getchar();
             category_edit(&task1);
             break;
         case 7:
+            getchar();
             progress_edit(&task1);
             break;
         case 8:

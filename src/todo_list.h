@@ -41,3 +41,7 @@ void category_edit(task* task1);
 void progress_edit(task* task1);
 
 void replacement(FILE* file, task* task1, int id);
+
+void write_in_file(FILE* file, task* task1, int id);
+
+void task_scan(FILE* file, task* task1, int id);
