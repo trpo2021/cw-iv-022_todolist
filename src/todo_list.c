@@ -28,6 +28,7 @@ void add(FILE* file[10])
 
 void write_in_file(FILE* file, task* task1, int id)
 {
+    fseek(file, 0, SEEK_END);
     char progress_bar[11] = "__________";
     int progress_counter = 0;
     int progress = task1->progress;
@@ -400,5 +401,25 @@ void move_to_bin(FILE* file[10], int id)
         bin_id = find_id(file[0]);
         if (i != (id - 1))
             write_in_file(file[0], &tasks[i], bin_id);
+    }
+}
+
+void move_to_archive(FILE* file[10], int id)
+{
+    const int number = find_id(file[0]) - 1;
+    task tasks[number];
+
+    for (int i = 0; i < number; i++)
+        task_scan(file[0], &tasks[i], (i + 1));
+
+    int archive_id = find_id(file[1]);
+    write_in_file(file[2], &tasks[id - 1], archive_id);
+
+    file[0] = fopen("users/user1.txt", "w+");
+
+    for (int i = 0; i < number; i++) {
+        archive_id = find_id(file[0]);
+        if (i != (id - 1))
+            write_in_file(file[0], &tasks[i], archive_id);
     }
 }

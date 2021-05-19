@@ -9,10 +9,13 @@ int main()
             = {NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL};
     file[0] = fopen("users/user1.txt", "r+");
     file[1] = fopen("users/user1bin.txt", "r+");
+    file[2] = fopen("users/user1archive.txt", "r+");
     if (file[0] == NULL)
         file[0] = fopen("users/user1.txt", "w+");
     if (file[1] == NULL)
         file[1] = fopen("users/user1bin.txt", "w+");
+    if (file[2] == NULL)
+        file[2] = fopen("users/user1archive.txt", "w+");
     do {
         printf("1. Список дел\n");
         printf("2. Архив\n");
@@ -26,10 +29,10 @@ int main()
             todolist(file);
             break;
         case 2:
-            archive();
+            archive(file);
             break;
         case 3:
-            bin_of_tasks(file);
+            bin(file);
             break;
         case 4:
             settings();
