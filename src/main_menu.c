@@ -34,6 +34,9 @@ void todolist(FILE* file[10])
             edit(file[0], id);
             break;
         case 4:
+            printf("Введите номер дела: ");
+            scanf("%d", &id);
+            move_to_archive(file, id);
             break;
         case 5:
             break;
@@ -45,16 +48,6 @@ void todolist(FILE* file[10])
             break;
         }
     } while (number != 8);
-}
-
-int archive()
-{
-    return 0;
-}
-
-int bin()
-{
-    return 0;
 }
 
 int settings()

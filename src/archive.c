@@ -1,7 +1,7 @@
-#include "bin.h"
+#include "archive.h"
 #include "todo_list.h"
 
-void bin(FILE* file[10])
+void archive(FILE* file[10])
 {
     int id, number;
 
@@ -9,11 +9,11 @@ void bin(FILE* file[10])
         printf("id            Название                                         "
                "         Описание                                  Статус    "
                "Дата    Приоритет       Категория          Прогресс\n");
-        read_tasks(file[1]);
+        read_tasks(file[2]);
         printf("\n");
         printf("1. Удаление дела\n");
-        printf("2. Очистка корзины\n");
-        printf("3. Восстановление дела\n");
+        printf("2. Очистка архива\n");
+        printf("3. Разархивирование дела\n");
         printf("4. Сортировка\n");
         printf("5. Выход в главное меню\n");
         scanf("%d", &number);
@@ -21,15 +21,15 @@ void bin(FILE* file[10])
         case 1:
             printf("Введите номер дела: ");
             scanf("%d", &id);
-            delete_task(file, id);
+            delete_task_from_the_archive(file, id);
             break;
         case 2:
-            clean_bin(file);
+            clean_archive(file);
             break;
         case 3:
             printf("Введите номер дела: ");
             scanf("%d", &id);
-            restore_from_bin(file, id);
+            unarchive(file, id);
             break;
         case 4:
             break;
@@ -39,44 +39,44 @@ void bin(FILE* file[10])
     } while (number != 5);
 }
 
-void delete_task(FILE* file[10], int id)
+void delete_task_from_the_archive(FILE* file[10], int id)
 {
-    const int number = find_id(file[1]) - 1;
+    const int number = find_id(file[2]) - 1;
     task tasks[number];
 
     for (int i = 0; i < number; i++)
-        task_scan(file[1], &tasks[i], (i + 1));
+        task_scan(file[2], &tasks[i], (i + 1));
 
-    file[1] = fopen("users/user1bin.txt", "w+");
+    file[2] = fopen("users/user1archive.txt", "w+");
 
     for (int i = 0; i < number; i++) {
-        int bin_id = find_id(file[1]);
+        int archive_id = find_id(file[2]);
         if (i != (id - 1))
-            write_in_file(file[1], &tasks[i], bin_id);
+            write_in_file(file[2], &tasks[i], archive_id);
     }
 }
 
-void clean_bin(FILE* file[10])
+void clean_archive(FILE* file[10])
 {
-    file[1] = fopen("users/user1bin.txt", "w+");
+    file[2] = fopen("users/user1archive.txt", "w+");
 }
 
-void restore_from_bin(FILE* file[10], int id)
+void unarchive(FILE* file[10], int id)
 {
-    const int number = find_id(file[1]) - 1;
+    const int number = find_id(file[2]) - 1;
     task tasks[number];
 
     for (int i = 0; i < number; i++)
-        task_scan(file[1], &tasks[i], (i + 1));
+        task_scan(file[2], &tasks[i], (i + 1));
 
-    int bin_id = find_id(file[0]);
-    write_in_file(file[0], &tasks[id - 1], bin_id);
+    int archive_id = find_id(file[0]);
+    write_in_file(file[0], &tasks[id - 1], archive_id);
 
-    file[1] = fopen("users/user1bin.txt", "w+");
+    file[2] = fopen("users/user1archive.txt", "w+");
 
     for (int i = 0; i < number; i++) {
-        bin_id = find_id(file[1]);
+        archive_id = find_id(file[2]);
         if (i != (id - 1))
-            write_in_file(file[1], &tasks[i], bin_id);
+            write_in_file(file[2], &tasks[i], archive_id);
     }
 }
