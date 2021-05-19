@@ -28,7 +28,6 @@ void add(FILE* file[10])
 
 void write_in_file(FILE* file, task* task1, int id)
 {
-    fseek(file, 0, SEEK_END);
     char progress_bar[11] = "__________";
     int progress_counter = 0;
     int progress = task1->progress;
