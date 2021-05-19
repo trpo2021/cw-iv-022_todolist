@@ -5,6 +5,10 @@
 
 void todolist(FILE* file[10]);
 
+void bin(FILE* file[10]);
+
+void archive(FILE* file[10]);
+
 int settings();
 
 void authors();
