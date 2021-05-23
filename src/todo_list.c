@@ -63,7 +63,7 @@ void read_tasks(FILE* file)
     }
 }
 
-int find_id(FILE* file)
+int find_id(FILE* file) // Поиск id для нового дела
 {
     char string[250];
     int id = 0;
