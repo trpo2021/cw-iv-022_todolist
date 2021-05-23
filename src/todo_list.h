@@ -49,3 +49,5 @@ void task_scan(FILE* file, task* task1, int id);
 void move_to_bin(FILE* file[10], int id);
 
 void move_to_archive(FILE* file[10], int id);
+
+void duplication(FILE* file[10], int id);
