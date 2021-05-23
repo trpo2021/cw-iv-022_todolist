@@ -422,3 +422,15 @@ void move_to_archive(FILE* file[10], int id)
             write_in_file(file[0], &tasks[i], archive_id);
     }
 }
+
+void duplication(FILE* file[10], int id)
+{
+    const int number = find_id(file[0]) - 1;
+    task tasks[number];
+
+    for (int i = 0; i < number; i++)
+        task_scan(file[0], &tasks[i], (i + 1));
+
+    int duplication_id = find_id(file[0]);
+    write_in_file(file[0], &tasks[id - 1], duplication_id);
+}

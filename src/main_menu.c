@@ -43,6 +43,9 @@ void todolist(FILE* file[10])
         case 6:
             break;
         case 7:
+            printf("Введите номер дела: ");
+            scanf("%d", &id);
+            duplication(file, id);
             break;
         case 8:
             break;
