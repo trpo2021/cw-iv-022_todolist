@@ -2,19 +2,32 @@ OFLAGS=gcc -Wall -c -Werror -o
 BINFLAGS=gcc -Wall -Werror -o
 
 all: bin/todo
-bin/todo: obj/main_menu.o obj/main.o obj/todo_list.o obj/bin.o obj/archive.o
+bin/todo: obj/src/main_menu.o obj/src/main.o obj/src/todo_list.o obj/src/bin.o obj/src/archive.o obj/src/libtodo.a
 	$(BINFLAGS) $@ $^
-obj/main_menu.o: src/main_menu.c
+obj/src/libtodo.a: obj/src/main_menu.o obj/src/main.o obj/src/todo_list.o obj/src/bin.o obj/src/archive.o
+		ar rcs obj/src/libtodo.a obj/src/libtodo.a obj/src/main_menu.o obj/src/main.o obj/src/todo_list.o obj/src/bin.o obj/src/archive.o
+obj/src/main_menu.o: src/main_menu.c
 	$(OFLAGS) $@ $^
-obj/main.o: src/main.c
+obj/src/main.o: src/main.c
 	$(OFLAGS) $@ $^
-obj/todo_list.o: src/todo_list.c
+obj/src/todo_list.o: src/todo_list.c
 	$(OFLAGS) $@ $^
-obj/bin.o: src/bin.c
+obj/src/bin.o: src/bin.c
 	$(OFLAGS) $@ $^
-obj/archive.o: src/archive.c
+obj/src/archive.o: src/archive.c
 	$(OFLAGS) $@ $^
+
+test: bin/test
+
+bin/test: obj/test/tests.o obj/test/main.o obj/src/libtodo.a
+	gcc -Wall -I thirdparty -I src -Werror -o bin/test obj/test/tests.o obj/test/main.o obj/src/libtodo.a
+
+obj/test/main.o: test/main.c
+	gcc -Wall -I thirdparty -I src -Werror -c -o obj/test/main.o test/main.c
+
+obj/test/tests.o: test/tests.c
+	gcc -Wall -I thirdparty -I src -Werror -c -o obj/test/tests.o test/tests.c
 
 .PHONY : clean
 clean:
-	rm -rf obj/*.o obj/*.a bin/todo
+	rm -rf obj/src/*.o obj/src/*.a obj/test/*.o obj/test/*.a bin/todo bin/test
