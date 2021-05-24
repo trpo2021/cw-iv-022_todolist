@@ -57,7 +57,7 @@ CTEST(day_checks, dcheck_3)
 
 CTEST(day_checks, dcheck_4)
 {   
-    int day = 'm';
+    int day = 'a';
     int result = day_check(day);
     int expected = -1;
     ASSERT_EQUAL(expected, result);
@@ -91,6 +91,62 @@ CTEST(day_checks, dcheck_8)
 {   
     int day = 31;
     int result = day_check(day);
+    int expected = 1;
+    ASSERT_EQUAL(expected, result);
+}
+
+CTEST(month_checks, mcheck_1)
+{   
+    int month = 1;
+    int result = month_check(month);
+    int expected = 1;
+    ASSERT_EQUAL(expected, result);
+}
+
+CTEST(month_checks, mcheck_2)
+{   
+    int month = 0;
+    int result = month_check(month);
+    int expected = -1;
+    ASSERT_EQUAL(expected, result);
+}
+
+CTEST(month_checks, mcheck_3)
+{   
+    int month = -1;
+    int result = month_check(month);
+    int expected = -1;
+    ASSERT_EQUAL(expected, result);
+}
+
+CTEST(month_checks, mcheck_4)
+{   
+    int month = 12;
+    int result = month_check(month);
+    int expected = 1;
+    ASSERT_EQUAL(expected, result);
+}
+
+CTEST(month_checks, mcheck_5)
+{   
+    int month = 13;
+    int result = month_check(month);
+    int expected = -1;
+    ASSERT_EQUAL(expected, result);
+}
+
+CTEST(month_checks, mcheck_6)
+{   
+    int month = 'a';
+    int result = month_check(month);
+    int expected = -1;
+    ASSERT_EQUAL(expected, result);
+}
+
+CTEST(month_checks, mcheck_7)
+{   
+    int month = 6;
+    int result = month_check(month);
     int expected = 1;
     ASSERT_EQUAL(expected, result);
 }
