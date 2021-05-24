@@ -150,3 +150,59 @@ CTEST(month_checks, mcheck_7)
     int expected = 1;
     ASSERT_EQUAL(expected, result);
 }
+
+CTEST(year_checks, ycheck_1)
+{   
+    int year = 2020;
+    int result = year_check(year);
+    int expected = 1;
+    ASSERT_EQUAL(expected, result);
+}
+
+CTEST(year_checks, ycheck_2)
+{   
+    int year = 1000;
+    int result = year_check(year);
+    int expected = -1;
+    ASSERT_EQUAL(expected, result);
+}
+
+CTEST(year_checks, ycheck_3)
+{   
+    int year = 1001;
+    int result = year_check(year);
+    int expected = 1;
+    ASSERT_EQUAL(expected, result);
+}
+
+CTEST(year_checks, ycheck_4)
+{   
+    int year = 3000;
+    int result = year_check(year);
+    int expected = -1;
+    ASSERT_EQUAL(expected, result);
+}
+
+CTEST(year_checks, ycheck_5)
+{   
+    int year = 2999;
+    int result = year_check(year);
+    int expected = 1;
+    ASSERT_EQUAL(expected, result);
+}
+
+CTEST(year_checks, ycheck_6)
+{   
+    int year = 'y';
+    int result = year_check(year);
+    int expected = -1;
+    ASSERT_EQUAL(expected, result);
+}
+
+CTEST(year_checks, ycheck_7)
+{   
+    int year = -2020;
+    int result = year_check(year);
+    int expected = -1;
+    ASSERT_EQUAL(expected, result);
+}
