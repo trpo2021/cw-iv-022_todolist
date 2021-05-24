@@ -2,6 +2,7 @@
 
 #include <locale.h>
 #include <stdio.h>
+#include <ctype.h>
 
 typedef struct {
     char description[80];

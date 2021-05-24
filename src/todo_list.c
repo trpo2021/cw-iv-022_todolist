@@ -125,7 +125,7 @@ void deadline_edit(task* task1)
     printf("Введите крайний срок(через пробел: день месяц год, 0 - если "
            "бессрочное): ");
     scanf("%d", &task1->day);
-    while (day_check(task1->day) == -1) {
+    if (day_check(task1->day) == -1) {
         printf("Введите корректную дату(день): ");
         scanf("%d", &task1->day);
     }
@@ -437,7 +437,7 @@ void duplication(FILE* file[10], int id)
 
 int day_check(int day)
 {
-    if (day > 0 && day < 32)
+    if (isdigit(day) == 0 && day > 0 && day < 32)
         return 1;
     return -1;
 }
