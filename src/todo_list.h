@@ -3,6 +3,7 @@
 #include <locale.h>
 #include <stdio.h>
 #include <ctype.h>
+#include <string.h>
 
 typedef struct {
     char description[80];

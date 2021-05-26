@@ -411,7 +411,7 @@ void move_to_archive(FILE* file[10], int id)
     for (int i = 0; i < number; i++)
         task_scan(file[0], &tasks[i], (i + 1));
 
-    int archive_id = find_id(file[1]);
+    int archive_id = find_id(file[2]);
     write_in_file(file[2], &tasks[id - 1], archive_id);
 
     file[0] = fopen("users/user1.txt", "w+");
