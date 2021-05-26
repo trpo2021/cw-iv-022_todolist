@@ -301,41 +301,24 @@ CTEST(move_to_archive_checks, mtacheck_6)
     fclose(file[2]);
 }
 
+CTEST(move_to_archive_checks, mtacheck_7)
+{   
+    task tasks[10];
+    file[0] = fopen("test/users/user1.txt", "r+");
+    file[2] = fopen("test/users/user1archive.txt", "r+");
+    task_scan(file[0], &tasks[1], 1);
+    char user[20];
+    strcpy(user, tasks[1].category);
+    move_to_archive(file, 1);
+    task_scan(file[2], &tasks[1], find_id(file[2]) - 1);
+    char archive[20];
+    strcpy(archive, tasks[1].category);
+    ASSERT_STR(user, archive);
+    fclose(file[0]);
+    fclose(file[2]);
+}
+
 CTEST(move_to_archive_checks, mtacheck_8)
-{   
-    task tasks[10];
-    file[0] = fopen("test/users/user1.txt", "r+");
-    file[2] = fopen("test/users/user1archive.txt", "r+");
-    task_scan(file[0], &tasks[1], 1);
-    char user[20];
-    strcpy(user, tasks[1].category);
-    move_to_archive(file, 1);
-    task_scan(file[2], &tasks[1], find_id(file[2]) - 1);
-    char archive[20];
-    strcpy(archive, tasks[1].category);
-    ASSERT_STR(user, archive);
-    fclose(file[0]);
-    fclose(file[2]);
-}
-
-CTEST(move_to_archive_checks, mtacheck_9)
-{   
-    task tasks[10];
-    file[0] = fopen("test/users/user1.txt", "r+");
-    file[2] = fopen("test/users/user1archive.txt", "r+");
-    task_scan(file[0], &tasks[1], 1);
-    char user[20];
-    strcpy(user, tasks[1].category);
-    move_to_archive(file, 1);
-    task_scan(file[2], &tasks[1], find_id(file[2]) - 1);
-    char archive[20];
-    strcpy(archive, tasks[1].category);
-    ASSERT_STR(user, archive);
-    fclose(file[0]);
-    fclose(file[2]);
-}
-
-CTEST(move_to_archive_checks, mtacheck_10)
 {   
     task tasks[10];
     file[0] = fopen("test/users/user1.txt", "r+");
@@ -352,7 +335,7 @@ CTEST(move_to_archive_checks, mtacheck_10)
     fclose(file[2]);
 }
 
-CTEST(move_to_archive_checks, mtacheck_11)
+CTEST(move_to_archive_checks, mtacheck_9)
 {   
     task tasks[10];
     file[0] = fopen("test/users/user1.txt", "r+");
@@ -371,7 +354,6 @@ CTEST(move_to_archive_checks, mtacheck_11)
     fclose(file[2]);
 }
 
-
 CTEST(move_to_bin_checks, mtbcheck_1)
 {   
     task tasks[10];
@@ -380,7 +362,7 @@ CTEST(move_to_bin_checks, mtbcheck_1)
     task_scan(file[0], &tasks[1], 1);
     int user = tasks[1].day;
     move_to_bin(file, 1);
-    task_scan(file[2], &tasks[1], find_id(file[2]) - 1);
+    task_scan(file[1], &tasks[1], find_id(file[2]) - 1);
     int bin = tasks[1].day;
     ASSERT_EQUAL(user, bin);
     fclose(file[0]);
@@ -395,7 +377,7 @@ CTEST(move_to_bin_checks, mtbcheck_2)
     task_scan(file[0], &tasks[1], 1);
     int user = tasks[1].month;
     move_to_bin(file, 1);
-    task_scan(file[2], &tasks[1], find_id(file[2]) - 1);
+    task_scan(file[1], &tasks[1], find_id(file[2]) - 1);
     int bin = tasks[1].month;
     ASSERT_EQUAL(user, bin);
     fclose(file[0]);
@@ -410,7 +392,7 @@ CTEST(move_to_bin_checks, mtbcheck_3)
     task_scan(file[0], &tasks[1], 1);
     int user = tasks[1].year;
     move_to_bin(file, 1);
-    task_scan(file[2], &tasks[1], find_id(file[2]) - 1);
+    task_scan(file[1], &tasks[1], find_id(file[2]) - 1);
     int bin = tasks[1].year;
     ASSERT_EQUAL(user, bin);
     fclose(file[0]);
@@ -425,9 +407,96 @@ CTEST(move_to_bin_checks, mtbcheck_4)
     task_scan(file[0], &tasks[1], 1);
     int user = tasks[1].progress;
     move_to_bin(file, 1);
-    task_scan(file[2], &tasks[1], find_id(file[2]) - 1);
+    task_scan(file[1], &tasks[1], find_id(file[2]) - 1);
     int bin = tasks[1].progress;
     ASSERT_EQUAL(user, bin);
     fclose(file[0]);
     fclose(file[1]);
+}
+
+CTEST(move_to_bin_checks, mtbcheck_5)
+{   
+    task tasks[10];
+    file[0] = fopen("test/users/user1.txt", "r+");
+    file[1] = fopen("test/users/user1bin.txt", "r+");
+    task_scan(file[0], &tasks[1], 1);
+    char user[30];
+    strcpy(user, tasks[1].name);
+    move_to_bin(file, 1);
+    task_scan(file[1], &tasks[1], find_id(file[2]) - 1);
+    char bin[30];
+    strcpy(bin, tasks[1].name);
+    ASSERT_STR(user, bin);
+    fclose(file[0]);
+    fclose(file[1]);
+}
+
+CTEST(move_to_bin_checks, mtbcheck_6)
+{   
+    task tasks[10];
+    file[0] = fopen("test/users/user1.txt", "r+");
+    file[1] = fopen("test/users/user1bin.txt", "r+");
+    task_scan(file[0], &tasks[1], 1);
+    char user[80];
+    strcpy(user, tasks[1].description);
+    move_to_bin(file, 1);
+    task_scan(file[1], &tasks[1], find_id(file[2]) - 1);
+    char bin[80];
+    strcpy(bin, tasks[1].description);
+    ASSERT_STR(user, bin);
+    fclose(file[0]);
+    fclose(file[1]);
+}
+
+CTEST(move_to_bin_checks, mtbcheck_7)
+{   
+    task tasks[10];
+    file[0] = fopen("test/users/user1.txt", "r+");
+    file[1] = fopen("test/users/user1bin.txt", "r+");
+    task_scan(file[0], &tasks[1], 1);
+    char user[20];
+    strcpy(user, tasks[1].category);
+    move_to_bin(file, 1);
+    task_scan(file[1], &tasks[1], find_id(file[2]) - 1);
+    char bin[20];
+    strcpy(bin, tasks[1].category);
+    ASSERT_STR(user, bin);
+    fclose(file[0]);
+    fclose(file[1]);
+}
+
+CTEST(move_to_bin_checks, mtbcheck_8)
+{   
+    task tasks[10];
+    file[0] = fopen("test/users/user1.txt", "r+");
+    file[1] = fopen("test/users/user1bin.txt", "r+");
+    task_scan(file[0], &tasks[1], 1);
+    char user[4];
+    strcpy(user, tasks[1].priority);
+    move_to_bin(file, 1);
+    task_scan(file[1], &tasks[1], find_id(file[2]) - 1);
+    char bin[20];
+    strcpy(bin, tasks[1].priority);
+    ASSERT_STR(user, bin);
+    fclose(file[0]);
+    fclose(file[1]);
+}
+
+CTEST(move_to_bin_checks, mtbcheck_9)
+{   
+    task tasks[10];
+    file[0] = fopen("test/users/user1.txt", "r+");
+    file[1] = fopen("test/users/user1bin.txt", "r+");
+    task_scan(file[0], &tasks[1], 1);
+    char user = tasks[1].status;
+    move_to_bin(file, 1);
+    task_scan(file[2], &tasks[1], find_id(file[2]) - 1);
+    char bin = tasks[1].status;
+    int expected = 1;
+    int result = -1;
+    if (user == bin)
+        result = 1;
+    ASSERT_EQUAL(expected, result);
+    fclose(file[0]);
+    fclose(file[2]);
 }
