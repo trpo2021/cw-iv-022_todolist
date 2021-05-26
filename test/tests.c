@@ -362,7 +362,7 @@ CTEST(move_to_bin_checks, mtbcheck_1)
     task_scan(file[0], &tasks[1], 1);
     int user = tasks[1].day;
     move_to_bin(file, 1);
-    task_scan(file[1], &tasks[1], find_id(file[2]) - 1);
+    task_scan(file[1], &tasks[1], find_id(file[1]) - 1);
     int bin = tasks[1].day;
     ASSERT_EQUAL(user, bin);
     fclose(file[0]);
@@ -377,7 +377,7 @@ CTEST(move_to_bin_checks, mtbcheck_2)
     task_scan(file[0], &tasks[1], 1);
     int user = tasks[1].month;
     move_to_bin(file, 1);
-    task_scan(file[1], &tasks[1], find_id(file[2]) - 1);
+    task_scan(file[1], &tasks[1], find_id(file[1]) - 1);
     int bin = tasks[1].month;
     ASSERT_EQUAL(user, bin);
     fclose(file[0]);
@@ -392,7 +392,7 @@ CTEST(move_to_bin_checks, mtbcheck_3)
     task_scan(file[0], &tasks[1], 1);
     int user = tasks[1].year;
     move_to_bin(file, 1);
-    task_scan(file[1], &tasks[1], find_id(file[2]) - 1);
+    task_scan(file[1], &tasks[1], find_id(file[1]) - 1);
     int bin = tasks[1].year;
     ASSERT_EQUAL(user, bin);
     fclose(file[0]);
@@ -407,7 +407,7 @@ CTEST(move_to_bin_checks, mtbcheck_4)
     task_scan(file[0], &tasks[1], 1);
     int user = tasks[1].progress;
     move_to_bin(file, 1);
-    task_scan(file[1], &tasks[1], find_id(file[2]) - 1);
+    task_scan(file[1], &tasks[1], find_id(file[1]) - 1);
     int bin = tasks[1].progress;
     ASSERT_EQUAL(user, bin);
     fclose(file[0]);
@@ -423,7 +423,7 @@ CTEST(move_to_bin_checks, mtbcheck_5)
     char user[30];
     strcpy(user, tasks[1].name);
     move_to_bin(file, 1);
-    task_scan(file[1], &tasks[1], find_id(file[2]) - 1);
+    task_scan(file[1], &tasks[1], find_id(file[1]) - 1);
     char bin[30];
     strcpy(bin, tasks[1].name);
     ASSERT_STR(user, bin);
@@ -440,7 +440,7 @@ CTEST(move_to_bin_checks, mtbcheck_6)
     char user[80];
     strcpy(user, tasks[1].description);
     move_to_bin(file, 1);
-    task_scan(file[1], &tasks[1], find_id(file[2]) - 1);
+    task_scan(file[1], &tasks[1], find_id(file[1]) - 1);
     char bin[80];
     strcpy(bin, tasks[1].description);
     ASSERT_STR(user, bin);
@@ -457,7 +457,7 @@ CTEST(move_to_bin_checks, mtbcheck_7)
     char user[20];
     strcpy(user, tasks[1].category);
     move_to_bin(file, 1);
-    task_scan(file[1], &tasks[1], find_id(file[2]) - 1);
+    task_scan(file[1], &tasks[1], find_id(file[1]) - 1);
     char bin[20];
     strcpy(bin, tasks[1].category);
     ASSERT_STR(user, bin);
@@ -474,7 +474,7 @@ CTEST(move_to_bin_checks, mtbcheck_8)
     char user[4];
     strcpy(user, tasks[1].priority);
     move_to_bin(file, 1);
-    task_scan(file[1], &tasks[1], find_id(file[2]) - 1);
+    task_scan(file[1], &tasks[1], find_id(file[1]) - 1);
     char bin[20];
     strcpy(bin, tasks[1].priority);
     ASSERT_STR(user, bin);
@@ -490,7 +490,7 @@ CTEST(move_to_bin_checks, mtbcheck_9)
     task_scan(file[0], &tasks[1], 1);
     char user = tasks[1].status;
     move_to_bin(file, 1);
-    task_scan(file[2], &tasks[1], find_id(file[2]) - 1);
+    task_scan(file[1], &tasks[1], find_id(file[1]) - 1);
     char bin = tasks[1].status;
     int expected = 1;
     int result = -1;
@@ -508,7 +508,7 @@ CTEST(duplication_checks, duplcheck_1)
     task_scan(file[0], &tasks[1], 1);
     int original = tasks[1].day;
     duplication(file, 1);
-    task_scan(file[1], &tasks[1], find_id(file[2]) - 1);
+    task_scan(file[0], &tasks[1], find_id(file[0]) - 1);
     int duplicated = tasks[1].day;
     ASSERT_EQUAL(original, duplicated);
     fclose(file[0]);
@@ -521,7 +521,7 @@ CTEST(duplication_checks, duplcheck_2)
     task_scan(file[0], &tasks[1], 1);
     int original = tasks[1].month;
     duplication(file, 1);
-    task_scan(file[1], &tasks[1], find_id(file[2]) - 1);
+    task_scan(file[0], &tasks[1], find_id(file[0]) - 1);
     int duplicated = tasks[1].month;
     ASSERT_EQUAL(original, duplicated);
     fclose(file[0]);
@@ -534,7 +534,7 @@ CTEST(duplication_checks, duplcheck_3)
     task_scan(file[0], &tasks[1], 1);
     int original = tasks[1].year;
     duplication(file, 1);
-    task_scan(file[1], &tasks[1], find_id(file[2]) - 1);
+    task_scan(file[0], &tasks[1], find_id(file[0]) - 1);
     int duplicated = tasks[1].year;
     ASSERT_EQUAL(original, duplicated);
     fclose(file[0]);
@@ -547,7 +547,7 @@ CTEST(duplication_checks, duplcheck_4)
     task_scan(file[0], &tasks[1], 1);
     int original = tasks[1].progress;
     duplication(file, 1);
-    task_scan(file[1], &tasks[1], find_id(file[2]) - 1);
+    task_scan(file[0], &tasks[1], find_id(file[0]) - 1);
     int duplicated = tasks[1].progress;
     ASSERT_EQUAL(original, duplicated);
     fclose(file[0]);
@@ -561,7 +561,7 @@ CTEST(duplication_checks, duplcheck_5)
     char original[30];
     strcpy(original, tasks[1].name);
     duplication(file, 1);
-    task_scan(file[1], &tasks[1], find_id(file[2]) - 1);
+    task_scan(file[0], &tasks[1], find_id(file[0]) - 1);
     char duplicated[30];
     strcpy(duplicated, tasks[1].name);
     ASSERT_STR(original, duplicated);
@@ -576,7 +576,7 @@ CTEST(duplication_checks, duplcheck_6)
     char original[80];
     strcpy(original, tasks[1].description);
     duplication(file, 1);
-    task_scan(file[1], &tasks[1], find_id(file[2]) - 1);
+    task_scan(file[0], &tasks[1], find_id(file[0]) - 1);
     char duplicated[80];
     strcpy(duplicated, tasks[1].description);
     ASSERT_STR(original, duplicated);
@@ -591,7 +591,7 @@ CTEST(duplication_checks, duplcheck_7)
     char original[20];
     strcpy(original, tasks[1].category);
     duplication(file, 1);
-    task_scan(file[1], &tasks[1], find_id(file[2]) - 1);
+    task_scan(file[0], &tasks[1], find_id(file[0]) - 1);
     char duplicated[20];
     strcpy(duplicated, tasks[1].category);
     ASSERT_STR(original, duplicated);
@@ -606,7 +606,7 @@ CTEST(duplication_checks, duplcheck_8)
     char original[4];
     strcpy(original, tasks[1].priority);
     duplication(file, 1);
-    task_scan(file[1], &tasks[1], find_id(file[2]) - 1);
+    task_scan(file[1], &tasks[1], find_id(file[0]) - 1);
     char duplicated[4];
     strcpy(duplicated, tasks[1].priority);
     ASSERT_STR(original, duplicated);
@@ -620,7 +620,7 @@ CTEST(duplication_checks, duplcheck_9)
     task_scan(file[0], &tasks[1], 1);
     char original = tasks[1].status;
     duplication(file, 1);
-    task_scan(file[2], &tasks[1], find_id(file[2]) - 1);
+    task_scan(file[0], &tasks[1], find_id(file[0]) - 1);
     char duplicated = tasks[1].status;
     int expected = 1;
     int result = -1;
@@ -628,4 +628,4 @@ CTEST(duplication_checks, duplcheck_9)
         result = 1;
     ASSERT_EQUAL(expected, result);
     fclose(file[0]);
-}
+}   
