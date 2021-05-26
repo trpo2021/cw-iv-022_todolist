@@ -500,3 +500,132 @@ CTEST(move_to_bin_checks, mtbcheck_9)
     fclose(file[0]);
     fclose(file[2]);
 }
+
+CTEST(duplication_checks, duplcheck_1)
+{   
+    task tasks[10];
+    file[0] = fopen("test/users/user4.txt", "r+");
+    task_scan(file[0], &tasks[1], 1);
+    int original = tasks[1].day;
+    duplication(file, 1);
+    task_scan(file[1], &tasks[1], find_id(file[2]) - 1);
+    int duplicated = tasks[1].day;
+    ASSERT_EQUAL(original, duplicated);
+    fclose(file[0]);
+}
+
+CTEST(duplication_checks, duplcheck_2)
+{   
+    task tasks[10];
+    file[0] = fopen("test/users/user4.txt", "r+");
+    task_scan(file[0], &tasks[1], 1);
+    int original = tasks[1].month;
+    duplication(file, 1);
+    task_scan(file[1], &tasks[1], find_id(file[2]) - 1);
+    int duplicated = tasks[1].month;
+    ASSERT_EQUAL(original, duplicated);
+    fclose(file[0]);
+}
+
+CTEST(duplication_checks, duplcheck_3)
+{   
+    task tasks[10];
+    file[0] = fopen("test/users/user4.txt", "r+");
+    task_scan(file[0], &tasks[1], 1);
+    int original = tasks[1].year;
+    duplication(file, 1);
+    task_scan(file[1], &tasks[1], find_id(file[2]) - 1);
+    int duplicated = tasks[1].year;
+    ASSERT_EQUAL(original, duplicated);
+    fclose(file[0]);
+}
+
+CTEST(duplication_checks, duplcheck_4)
+{   
+    task tasks[10];
+    file[0] = fopen("test/users/user4.txt", "r+");
+    task_scan(file[0], &tasks[1], 1);
+    int original = tasks[1].progress;
+    duplication(file, 1);
+    task_scan(file[1], &tasks[1], find_id(file[2]) - 1);
+    int duplicated = tasks[1].progress;
+    ASSERT_EQUAL(original, duplicated);
+    fclose(file[0]);
+}
+
+CTEST(duplication_checks, duplcheck_5)
+{   
+    task tasks[10];
+    file[0] = fopen("test/users/user4.txt", "r+");
+    task_scan(file[0], &tasks[1], 1);
+    char original[30];
+    strcpy(original, tasks[1].name);
+    duplication(file, 1);
+    task_scan(file[1], &tasks[1], find_id(file[2]) - 1);
+    char duplicated[30];
+    strcpy(duplicated, tasks[1].name);
+    ASSERT_STR(original, duplicated);
+    fclose(file[0]);
+}
+
+CTEST(duplication_checks, duplcheck_6)
+{   
+    task tasks[10];
+    file[0] = fopen("test/users/user4.txt", "r+");
+    task_scan(file[0], &tasks[1], 1);
+    char original[80];
+    strcpy(original, tasks[1].description);
+    duplication(file, 1);
+    task_scan(file[1], &tasks[1], find_id(file[2]) - 1);
+    char duplicated[80];
+    strcpy(duplicated, tasks[1].description);
+    ASSERT_STR(original, duplicated);
+    fclose(file[0]);
+}
+
+CTEST(duplication_checks, duplcheck_7)
+{   
+    task tasks[10];
+    file[0] = fopen("test/users/user4.txt", "r+");
+    task_scan(file[0], &tasks[1], 1);
+    char original[20];
+    strcpy(original, tasks[1].category);
+    duplication(file, 1);
+    task_scan(file[1], &tasks[1], find_id(file[2]) - 1);
+    char duplicated[20];
+    strcpy(duplicated, tasks[1].category);
+    ASSERT_STR(original, duplicated);
+    fclose(file[0]);
+}
+
+CTEST(duplication_checks, duplcheck_8)
+{   
+    task tasks[10];
+    file[0] = fopen("test/users/user4.txt", "r+");
+    task_scan(file[0], &tasks[1], 1);
+    char original[4];
+    strcpy(original, tasks[1].priority);
+    duplication(file, 1);
+    task_scan(file[1], &tasks[1], find_id(file[2]) - 1);
+    char duplicated[4];
+    strcpy(duplicated, tasks[1].priority);
+    ASSERT_STR(original, duplicated);
+    fclose(file[0]);
+}
+
+CTEST(duplication_checks, duplcheck_9)
+{   
+    task tasks[10];
+    file[0] = fopen("test/users/user4.txt", "r+");
+    task_scan(file[0], &tasks[1], 1);
+    char original = tasks[1].status;
+    duplication(file, 1);
+    task_scan(file[2], &tasks[1], find_id(file[2]) - 1);
+    char duplicated = tasks[1].status;
+    int expected = 1;
+    int result = -1;
+    if (original == duplicated)
+        result = 1;
+    ASSERT_EQUAL(expected, result);
+    fclose(file[0]);
+}
