@@ -836,3 +836,110 @@ CTEST(write_in_file_tests, write_check_9)
     ASSERT_EQUAL(tasks[1].progress, expected);
     fclose(file[0]);
 }
+
+CTEST(task_scans, scan_check_1)
+{   
+    task tasks[10];
+    file[0] = fopen("test/users/user1.txt", "r+");
+    char expected[30] = "Name";
+    task_scan(file[0], &tasks[1], 1);
+    tasks[1].name[4] = '\0';
+    ASSERT_STR(tasks[1].name, expected);
+    fclose(file[0]);
+}
+
+CTEST(task_scans, scan_check_2)
+{   
+    task tasks[10];
+    file[0] = fopen("test/users/user1.txt", "r+");
+    char expected[20] = "Category";
+    task_scan(file[0], &tasks[1], 1);
+    tasks[1].category[8] = '\0';
+    ASSERT_STR(tasks[1].category, expected);
+    fclose(file[0]);
+}
+
+CTEST(task_scans, scan_check_3)
+{   
+    task tasks[10];
+    file[0] = fopen("test/users/user1.txt", "r+");
+    char expected[80] = "Description";
+    task_scan(file[0], &tasks[1], 1);
+    tasks[1].description[11] = '\0';
+    ASSERT_STR(tasks[1].description, expected);
+    fclose(file[0]);
+}
+
+CTEST(task_scans, scan_check_4)
+{   
+    task tasks[10];
+    file[0] = fopen("test/users/user1.txt", "r+");
+    char expected[4] = "***";
+    task_scan(file[0], &tasks[1], 1);
+    ASSERT_STR(tasks[1].priority, expected);
+    fclose(file[0]);
+}
+
+CTEST(task_scans, scan_check_5)
+{   
+    task tasks[10];
+    file[0] = fopen("test/users/user1.txt", "r+");
+    char status = '~';
+    task_scan(file[0], &tasks[1], 1);
+    int expected = 1;
+    int result = -1;
+    if (status == tasks[1].status)
+    	result = 1;
+    ASSERT_EQUAL(result, expected);
+    fclose(file[0]);
+}
+
+CTEST(task_scans, scan_check_6)
+{   
+    task tasks[10];
+    file[0] = fopen("test/users/user1.txt", "r+");
+    int expected = 1;
+    task_scan(file[0], &tasks[1], 1);
+    ASSERT_EQUAL(tasks[1].day, expected);
+    fclose(file[0]);
+}
+
+CTEST(task_scans, scan_check_7)
+{   
+    task tasks[10];
+    file[0] = fopen("test/users/user1.txt", "r+");
+    int expected = 1;
+    task_scan(file[0], &tasks[1], 1);
+    ASSERT_EQUAL(tasks[1].month, expected);
+    fclose(file[0]);
+}
+
+CTEST(task_scans, scan_check_8)
+{   
+    task tasks[10];
+    file[0] = fopen("test/users/user1.txt", "r+");
+    int expected = 2020;
+    task_scan(file[0], &tasks[1], 1);
+    ASSERT_EQUAL(tasks[1].year, expected);
+    fclose(file[0]);
+}
+
+CTEST(task_scans, scan_check_9)
+{   
+    task tasks[10];
+    file[0] = fopen("test/users/user1.txt", "r+");
+    int expected = 10;
+    task_scan(file[0], &tasks[1], 1);
+    ASSERT_EQUAL(tasks[1].progress, expected);
+    fclose(file[0]);
+}
+
+CTEST(task_scans, scan_check_10)
+{   
+    task tasks[10];
+    file[0] = fopen("test/users/user1.txt", "r+");
+    int expected = 1;
+    task_scan(file[0], &tasks[1], 1);
+    ASSERT_EQUAL(tasks[1].id, expected);
+    fclose(file[0]);
+}
