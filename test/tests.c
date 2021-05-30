@@ -629,3 +629,210 @@ CTEST(duplication_checks, duplcheck_9)
     ASSERT_EQUAL(expected, result);
     fclose(file[0]);
 }   
+
+CTEST(write_in_file_tests, write_check_1)
+{   
+    task tasks[10];
+    file[0] = fopen("test/users/user4.txt", "r+");
+
+    strcpy(tasks[1].name, "Name");
+    strcpy(tasks[1].description, "Description");
+    strcpy(tasks[1].category, "Category");
+    strcpy(tasks[1].priority, "***");
+    tasks[1].status = '~';
+    tasks[1].day = 1;
+    tasks[1].month = 1;
+    tasks[1].year = 2020;
+    tasks[1].progress = 10;
+    char expected[30];
+    strcpy(expected, tasks[1].name);
+    for (int i = 4; i < 29; ++i)
+        expected[i] = ' ';
+    expected[29] = '\0';
+    write_in_file(file[0], &tasks[1], find_id(file[0]));
+    task_scan(file[0], &tasks[1], find_id(file[0]) - 1);
+    ASSERT_STR(tasks[1].name, expected);
+    fclose(file[0]);
+}
+
+CTEST(write_in_file_tests, write_check_2)
+{   
+    task tasks[10];
+    file[0] = fopen("test/users/user4.txt", "r+");
+
+    strcpy(tasks[1].name, "Name");
+    strcpy(tasks[1].description, "Description");
+    strcpy(tasks[1].category, "Category");
+    strcpy(tasks[1].priority, "***");
+    tasks[1].status = '~';
+    tasks[1].day = 1;
+    tasks[1].month = 1;
+    tasks[1].year = 2020;
+    tasks[1].progress = 10;
+    char expected[80];
+    strcpy(expected, tasks[1].description);
+    for (int i = 11; i < 79; ++i)
+        expected[i] = ' ';
+    expected[79] = '\0';
+    write_in_file(file[0], &tasks[1], find_id(file[0]));
+    task_scan(file[0], &tasks[1], find_id(file[0]) - 1);
+    ASSERT_STR(tasks[1].description, expected);
+    fclose(file[0]);
+}
+
+CTEST(write_in_file_tests, write_check_3)
+{   
+    task tasks[10];
+    file[0] = fopen("test/users/user4.txt", "r+");
+
+    strcpy(tasks[1].name, "Name");
+    strcpy(tasks[1].description, "Description");
+    strcpy(tasks[1].category, "Category");
+    strcpy(tasks[1].priority, "***");
+    tasks[1].status = '~';
+    tasks[1].day = 1;
+    tasks[1].month = 1;
+    tasks[1].year = 2020;
+    tasks[1].progress = 10;
+    char expected[20];
+    strcpy(expected, tasks[1].category);
+    for (int i = 8; i < 19; ++i)
+        expected[i] = ' ';
+    expected[19] = '\0';
+    write_in_file(file[0], &tasks[1], find_id(file[0]));
+    task_scan(file[0], &tasks[1], find_id(file[0]) - 1);
+    ASSERT_STR(tasks[1].category, expected);
+    fclose(file[0]);
+}
+
+CTEST(write_in_file_tests, write_check_4)
+{   
+    task tasks[10];
+    file[0] = fopen("test/users/user4.txt", "r+");
+
+    strcpy(tasks[1].name, "Name");
+    strcpy(tasks[1].description, "Description");
+    strcpy(tasks[1].category, "Category");
+    strcpy(tasks[1].priority, "***");
+    tasks[1].status = '~';
+    tasks[1].day = 1;
+    tasks[1].month = 1;
+    tasks[1].year = 2020;
+    tasks[1].progress = 10;
+    char expected[4];
+    strcpy(expected, tasks[1].priority);
+    expected[4] = '\0';
+    write_in_file(file[0], &tasks[1], find_id(file[0]));
+    task_scan(file[0], &tasks[1], find_id(file[0]) - 1);
+    ASSERT_STR(tasks[1].priority, expected);
+    fclose(file[0]);
+}
+
+CTEST(write_in_file_tests, write_check_5)
+{   
+    task tasks[10];
+    file[0] = fopen("test/users/user4.txt", "r+");
+
+    strcpy(tasks[1].name, "Name");
+    strcpy(tasks[1].description, "Description");
+    strcpy(tasks[1].category, "Category");
+    strcpy(tasks[1].priority, "***");
+    tasks[1].status = '~';
+    tasks[1].day = 1;
+    tasks[1].month = 1;
+    tasks[1].year = 2020;
+    tasks[1].progress = 10;
+    char read = '~';
+    write_in_file(file[0], &tasks[1], find_id(file[0]));
+    task_scan(file[0], &tasks[1], find_id(file[0]) - 1);
+    int result = -1;
+    int expected = 1;
+    if (read == tasks[1].status)
+        result = 1;
+    ASSERT_EQUAL(result, expected);
+    fclose(file[0]);
+}
+
+CTEST(write_in_file_tests, write_check_6)
+{   
+    task tasks[10];
+    file[0] = fopen("test/users/user4.txt", "r+");
+
+    strcpy(tasks[1].name, "Name");
+    strcpy(tasks[1].description, "Description");
+    strcpy(tasks[1].category, "Category");
+    strcpy(tasks[1].priority, "***");
+    tasks[1].status = '~';
+    tasks[1].day = 1;
+    tasks[1].month = 1;
+    tasks[1].year = 2020;
+    tasks[1].progress = 10;
+    int expected = 1;
+    write_in_file(file[0], &tasks[1], find_id(file[0]));
+    task_scan(file[0], &tasks[1], find_id(file[0]) - 1);
+    ASSERT_EQUAL(tasks[1].day, expected);
+    fclose(file[0]);
+}
+
+CTEST(write_in_file_tests, write_check_7)
+{   
+    task tasks[10];
+    file[0] = fopen("test/users/user4.txt", "r+");
+
+    strcpy(tasks[1].name, "Name");
+    strcpy(tasks[1].description, "Description");
+    strcpy(tasks[1].category, "Category");
+    strcpy(tasks[1].priority, "***");
+    tasks[1].status = '~';
+    tasks[1].day = 1;
+    tasks[1].month = 1;
+    tasks[1].year = 2020;
+    tasks[1].progress = 10;
+    int expected = 1;
+    write_in_file(file[0], &tasks[1], find_id(file[0]));
+    task_scan(file[0], &tasks[1], find_id(file[0]) - 1);
+    ASSERT_EQUAL(tasks[1].month, expected);
+    fclose(file[0]);
+}
+
+CTEST(write_in_file_tests, write_check_8)
+{   
+    task tasks[10];
+    file[0] = fopen("test/users/user4.txt", "r+");
+
+    strcpy(tasks[1].name, "Name");
+    strcpy(tasks[1].description, "Description");
+    strcpy(tasks[1].category, "Category");
+    strcpy(tasks[1].priority, "***");
+    tasks[1].status = '~';
+    tasks[1].day = 1;
+    tasks[1].month = 1;
+    tasks[1].year = 2020;
+    tasks[1].progress = 10;
+    int expected = 2020;
+    write_in_file(file[0], &tasks[1], find_id(file[0]));
+    task_scan(file[0], &tasks[1], find_id(file[0]) - 1);
+    ASSERT_EQUAL(tasks[1].year, expected);
+    fclose(file[0]);
+}
+
+CTEST(write_in_file_tests, write_check_9)
+{   
+    task tasks[10];
+    file[0] = fopen("test/users/user4.txt", "r+");
+
+    strcpy(tasks[1].name, "Name");
+    strcpy(tasks[1].description, "Description");
+    strcpy(tasks[1].category, "Category");
+    strcpy(tasks[1].priority, "***");
+    tasks[1].status = '~';
+    tasks[1].day = 1;
+    tasks[1].month = 1;
+    tasks[1].year = 2020;
+    tasks[1].progress = 10;
+    int expected = 10;
+    write_in_file(file[0], &tasks[1], find_id(file[0]));
+    task_scan(file[0], &tasks[1], find_id(file[0]) - 1);
+    ASSERT_EQUAL(tasks[1].progress, expected);
+    fclose(file[0]);
+}
