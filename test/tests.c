@@ -1,5 +1,7 @@
 #include "ctest.h"
 #include <todo_list.h>
+#include <archive.h>
+#include <bin.h>
 
 FILE* file[10]
             = {NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL};
@@ -942,4 +944,22 @@ CTEST(task_scans, scan_check_10)
     task_scan(file[0], &tasks[1], 1);
     ASSERT_EQUAL(tasks[1].id, expected);
     fclose(file[0]);
+}
+
+CTEST(cleans, clean_archive)
+{   
+    clean_archive(file);
+    int result = find_id(file[2]);
+    int expected = 1;
+    ASSERT_EQUAL(result, expected);
+    fclose(file[2]);
+}
+
+CTEST(cleans, clean_bin)
+{   
+    clean_bin(file);
+    int result = find_id(file[1]);
+    int expected = 1;
+    ASSERT_EQUAL(result, expected);
+    fclose(file[1]);
 }
