@@ -455,3 +455,263 @@ int year_check(int year)
         return 1;
     return -1;
 }
+
+void swap(task* task1, task* task2)
+{
+    char temp_string[250] = " ";
+    char temp_char = ' ';
+    unsigned int temp = 0;
+    strcpy(temp_string, task1->name);
+    strcpy(task1->name, task2->name);
+    strcpy(task2->name, temp_string);
+    memset(temp_string, '\0', strlen(temp_string));
+    strcpy(temp_string, task1->description);
+    strcpy(task1->description, task2->description);
+    strcpy(task2->description, temp_string);
+    memset(temp_string, '\0', strlen(temp_string));
+    temp_char = task1->status;
+    task1->status = task2->status;
+    task2->status = temp_char;
+    temp_char = ' ';
+    temp = task1->day;
+    task1->day = task2->day;
+    task2->day = temp;
+    temp = 0;
+    temp = task1->month;
+    task1->month = task2->month;
+    task2->month = temp;
+    temp = 0;
+    temp = task1->year;
+    task1->year = task2->year;
+    task2->year = temp;
+    temp = 0;
+    strcpy(temp_string, task1->priority);
+    strcpy(task1->priority, task2->priority);
+    strcpy(task2->priority, temp_string);
+    memset(temp_string, '\0', strlen(temp_string));
+    strcpy(temp_string, task1->category);
+    strcpy(task1->category, task2->category);
+    strcpy(task2->category, temp_string);
+    memset(temp_string, '\0', strlen(temp_string));
+    temp = task1->progress;
+    task1->progress = task2->progress;
+    task2->progress = temp;
+    temp = 0;
+}
+
+void sort_name(FILE* file, int id)
+{
+    const int number = find_id(file) - 1;
+    task tasks[number];
+    for (int i = 0; i < number; i++)
+        task_scan(file, &tasks[i], (i + 1));
+
+    for (int i = 0; i < (number - 1); i++) {
+        for (int j = (number - 1); j > i; j--) {
+            if (strcmp(tasks[i].name, tasks[j].name) > 0) {
+                swap(&tasks[i], &tasks[j]);
+                file = fopen("users/user1.txt", "w+");
+                for (int i = 0; i < number; i++) {
+                    int sort_id = find_id(file);
+                    write_in_file(file, &tasks[i], sort_id);
+                }
+            }
+        }
+    }
+    fclose(file);
+}
+
+void sort_description(FILE* file, int id)
+{
+    const int number = find_id(file) - 1;
+    task tasks[number];
+    for (int i = 0; i < number; i++)
+        task_scan(file, &tasks[i], (i + 1));
+
+    for (int i = 0; i < (number - 1); i++) {
+        for (int j = (number - 1); j > i; j--) {
+            if (strcmp(tasks[i].description, tasks[j].description) > 0) {
+                swap(&tasks[i], &tasks[j]);
+                file = fopen("users/user1.txt", "w+");
+                for (int i = 0; i < number; i++) {
+                    int sort_id = find_id(file);
+                    write_in_file(file, &tasks[i], sort_id);
+                }
+            }
+        }
+    }
+    fclose(file);
+}
+
+void sort_status(FILE* file, int id)
+{
+    const int number = find_id(file) - 1;
+    task tasks[number];
+    for (int i = 0; i < number; i++)
+        task_scan(file, &tasks[i], (i + 1));
+
+    for (int i = 0; i < (number - 1); i++) {
+        for (int j = (number - 1); j > i; j--) {
+            if (tasks[i].status > tasks[j].status) {
+                swap(&tasks[i], &tasks[j]);
+                file = fopen("users/user1.txt", "w+");
+                for (int i = 0; i < number; i++) {
+                    int sort_id = find_id(file);
+                    write_in_file(file, &tasks[i], sort_id);
+                }
+            }
+        }
+    }
+    fclose(file);
+}
+
+void sort_deadline(FILE* file, int id)
+{
+    const int number = find_id(file) - 1;
+    task tasks[number];
+    for (int i = 0; i < number; i++)
+        task_scan(file, &tasks[i], (i + 1));
+
+    for (int i = 0; i < (number - 1); i++) {
+        for (int j = (number - 1); j > i; j--) {
+            if (tasks[i].year > tasks[j].year) {
+                swap(&tasks[i], &tasks[j]);
+                file = fopen("users/user1.txt", "w+");
+                for (int i = 0; i < number; i++) {
+                    int sort_id = find_id(file);
+                    write_in_file(file, &tasks[i], sort_id);
+                }
+            } else if (
+                    (tasks[i].year == tasks[j].year)
+                    && (tasks[i].month > tasks[j].month)) {
+                swap(&tasks[i], &tasks[j]);
+                file = fopen("users/user1.txt", "w+");
+                for (int i = 0; i < number; i++) {
+                    int sort_id = find_id(file);
+                    write_in_file(file, &tasks[i], sort_id);
+                }
+            } else if (
+                    (tasks[i].year == tasks[j].year)
+                    && (tasks[i].month == tasks[j].month)
+                    && (tasks[i].day > tasks[j].day)) {
+                swap(&tasks[i], &tasks[j]);
+                file = fopen("users/user1.txt", "w+");
+                for (int i = 0; i < number; i++) {
+                    int sort_id = find_id(file);
+                    write_in_file(file, &tasks[i], sort_id);
+                }
+            }
+        }
+    }
+    fclose(file);
+}
+
+void sort_priority(FILE* file, int id)
+{
+    const int number = find_id(file) - 1;
+    task tasks[number];
+    for (int i = 0; i < number; i++)
+        task_scan(file, &tasks[i], (i + 1));
+
+    for (int i = 0; i < (number - 1); i++) {
+        for (int j = (number - 1); j > i; j--) {
+            if (strcmp(tasks[i].priority, tasks[j].priority) > 0) {
+                swap(&tasks[i], &tasks[j]);
+                file = fopen("users/user1.txt", "w+");
+                for (int i = 0; i < number; i++) {
+                    int sort_id = find_id(file);
+                    write_in_file(file, &tasks[i], sort_id);
+                }
+            }
+        }
+    }
+    fclose(file);
+}
+
+void sort_category(FILE* file, int id)
+{
+    const int number = find_id(file) - 1;
+    task tasks[number];
+    for (int i = 0; i < number; i++)
+        task_scan(file, &tasks[i], (i + 1));
+
+    for (int i = 0; i < (number - 1); i++) {
+        for (int j = (number - 1); j > i; j--) {
+            if (strcmp(tasks[i].category, tasks[j].category) > 0) {
+                swap(&tasks[i], &tasks[j]);
+                file = fopen("users/user1.txt", "w+");
+                for (int i = 0; i < number; i++) {
+                    int sort_id = find_id(file);
+                    write_in_file(file, &tasks[i], sort_id);
+                }
+            }
+        }
+    }
+    fclose(file);
+}
+
+void sort_progress(FILE* file, int id)
+{
+    const int number = find_id(file) - 1;
+    task tasks[number];
+    for (int i = 0; i < number; i++)
+        task_scan(file, &tasks[i], (i + 1));
+
+    for (int i = 0; i < (number - 1); i++) {
+        for (int j = (number - 1); j > i; j--) {
+            if (tasks[i].progress > tasks[j].progress) {
+                swap(&tasks[i], &tasks[j]);
+                file = fopen("users/user1.txt", "w+");
+                for (int i = 0; i < number; i++) {
+                    int sort_id = find_id(file);
+                    write_in_file(file, &tasks[i], sort_id);
+                }
+            }
+        }
+    }
+    fclose(file);
+}
+
+void sort(FILE* file, int id)
+{
+    int number;
+    do {
+        fclose(file);
+        file = fopen("users/user1.txt", "r+");
+        read_tasks(file);
+        printf("1. Отсортировать по названию\n");
+        printf("2. Отсортировать по описанию\n");
+        printf("3. Отсортировать по статусу\n");
+        printf("4. Отсортировать по крайнему сроку\n");
+        printf("5. Отсортировать по приоритету\n");
+        printf("6. Отсортировать по категории\n");
+        printf("7. Отсортировать по прогрессу\n");
+        printf("8. Выход в главное меню\n");
+        scanf("%d", &number);
+        switch (number) {
+        case 1:
+            sort_name(file, id);
+            break;
+        case 2:
+            sort_description(file, id);
+            break;
+        case 3:
+            sort_status(file, id);
+            break;
+        case 4:
+            sort_deadline(file, id);
+            break;
+        case 5:
+            sort_priority(file, id);
+            break;
+        case 6:
+            sort_category(file, id);
+            break;
+        case 7:
+            sort_progress(file, id);
+            break;
+        case 8:
+            break;
+        }
+    } while (number != 8);
+}

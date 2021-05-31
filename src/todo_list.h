@@ -59,3 +59,21 @@ int day_check(int day);
 int month_check(int month);
 
 int year_check(int year);
+
+void swap(task* task1, task* task2);
+
+void sort_name(FILE* file, int id);
+
+void sort_description(FILE* file, int id);
+
+void sort_status(FILE* file, int id);
+
+void sort_priority(FILE* file, int id);
+
+void sort_category(FILE* file, int id);
+
+void sort_progress(FILE* file, int id);
+
+void sort_deadline(FILE* file, int id);
+
+void sort(FILE* file, int id);
