@@ -2,6 +2,8 @@
 
 #include <locale.h>
 #include <stdio.h>
+#include <ctype.h>
+#include <string.h>
 
 typedef struct {
     char description[80];
@@ -51,3 +53,9 @@ void move_to_bin(FILE* file[10], int id);
 void move_to_archive(FILE* file[10], int id);
 
 void duplication(FILE* file[10], int id);
+
+int day_check(int day);
+
+int month_check(int month);
+
+int year_check(int year);

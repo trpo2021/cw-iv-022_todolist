@@ -63,7 +63,7 @@ void read_tasks(FILE* file)
     }
 }
 
-int find_id(FILE* file)
+int find_id(FILE* file) // Поиск id для нового дела
 {
     char string[250];
     int id = 0;
@@ -125,7 +125,7 @@ void deadline_edit(task* task1)
     printf("Введите крайний срок(через пробел: день месяц год, 0 - если "
            "бессрочное): ");
     scanf("%d", &task1->day);
-    while (task1->day > 31) {
+    if (day_check(task1->day) == -1) {
         printf("Введите корректную дату(день): ");
         scanf("%d", &task1->day);
     }
@@ -135,13 +135,13 @@ void deadline_edit(task* task1)
     } else {
         printf("Введите месяц: ");
         scanf("%d", &task1->month);
-        while (task1->month > 12) {
+        while (month_check(task1->month) == -1) {
             printf("Введите корректную дату(месяц): ");
             scanf("%d", &task1->month);
         }
         printf("Введите год: ");
         scanf("%d", &task1->year);
-        while ((task1->year > 9999) || (task1->year < 1000)) {
+        while (year_check(task1->year) == -1) {
             printf("Введите корректную дату(год): ");
             scanf("%d", &task1->year);
         }
@@ -411,7 +411,7 @@ void move_to_archive(FILE* file[10], int id)
     for (int i = 0; i < number; i++)
         task_scan(file[0], &tasks[i], (i + 1));
 
-    int archive_id = find_id(file[1]);
+    int archive_id = find_id(file[2]);
     write_in_file(file[2], &tasks[id - 1], archive_id);
 
     file[0] = fopen("users/user1.txt", "w+");
@@ -433,4 +433,25 @@ void duplication(FILE* file[10], int id)
 
     int duplication_id = find_id(file[0]);
     write_in_file(file[0], &tasks[id - 1], duplication_id);
+}
+
+int day_check(int day)
+{
+    if (isdigit(day) == 0 && day > 0 && day < 32)
+        return 1;
+    return -1;
+}
+
+int month_check(int month)
+{
+    if (month > 0 && month < 13)
+        return 1;
+    return -1;
+}
+
+int year_check(int year)
+{
+    if (year > 1000 && year < 3000)
+        return 1;
+    return -1;
 }
