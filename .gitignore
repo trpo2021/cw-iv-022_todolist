@@ -4,3 +4,4 @@ obj/test/*.o
 users/*.txt
 bin/todo
 bin/test
+test/users/test.txt
