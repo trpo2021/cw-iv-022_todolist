@@ -26,6 +26,6 @@ jobs:
         run: 1
         run: 1
         run: 2020
-        run: ***
+        run: a
         run: Category
         run: 10
