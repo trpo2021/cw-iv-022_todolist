@@ -437,6 +437,8 @@ void duplication(FILE* file[10], int id)
 
 int day_check(int day)
 {
+    if (day == 0)
+        return 2;
     if (isdigit(day) == 0 && day > 0 && day < 32)
         return 1;
     return -1;
