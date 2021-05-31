@@ -114,9 +114,9 @@ void status_edit(task* task1)
 {
     printf("Введите статус выполнения('-' не начал, '~' в процессе)*: ");
     task1->status = getchar();
-    while ((task1->status != '~') && (task1->status != '-'))
-    {
-        while (getchar() != '\n');
+    while ((task1->status != '~') && (task1->status != '-')) {
+        while (getchar() != '\n')
+            ;
         printf("Введите корректный статус: ");
         task1->status = getchar();
     }
@@ -161,17 +161,15 @@ void priority_edit(task* task1)
     fgetc(stdin);
     fgets(task1->priority, 4, stdin);
     task1->priority[3] = '\0';
-    for(i = 0; i < 3; i++)
-    {
-        if(task1->priority[i] == '\n')
+    for (i = 0; i < 3; i++) {
+        if (task1->priority[i] == '\n')
             task1->priority[i] = ' ';
-        if(task1->priority[i] == 0)
+        if (task1->priority[i] == 0)
             task1->priority[i] = ' ';
     }
     while (((task1->priority[0] != '*') && (task1->priority[0] != ' '))
-        || ((task1->priority[1] != '*') && (task1->priority[1] != ' '))
-        || ((task1->priority[2] != '*') && (task1->priority[2] != ' ')))
-    {
+           || ((task1->priority[1] != '*') && (task1->priority[1] != ' '))
+           || ((task1->priority[2] != '*') && (task1->priority[2] != ' '))) {
         printf("Введите корректный приоритет: ");
         count = 0;
         for (i = 0; i < 3; i++) {
@@ -181,25 +179,26 @@ void priority_edit(task* task1)
                 count++;
         }
         if (count == 0)
-            while (getchar() != '\n');
+            while (getchar() != '\n')
+                ;
         fgets(task1->priority, 4, stdin);
         for (i = 0; i < 4; i++) {
-            if(task1->priority[i] == '\n')
+            if (task1->priority[i] == '\n')
                 task1->priority[i] = ' ';
-            if(task1->priority[i] == 0)
+            if (task1->priority[i] == 0)
                 task1->priority[i] = ' ';
         }
     }
     count = 0;
     for (int i = 0; i < 3; i++) {
-    if (task1->priority[i] == 10)
-        task1->priority[i] = 32;
-    if (task1->priority[i] == 32)
-        count++;
+        if (task1->priority[i] == 10)
+            task1->priority[i] = 32;
+        if (task1->priority[i] == 32)
+            count++;
     }
     if (count == 0)
-    while (getchar() != '\n')
-        ;
+        while (getchar() != '\n')
+            ;
     task1->priority[3] = '\0';
 }
 
