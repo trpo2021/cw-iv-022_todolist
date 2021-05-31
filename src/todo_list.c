@@ -114,8 +114,12 @@ void status_edit(task* task1)
 {
     printf("Введите статус выполнения('-' не начал, '~' в процессе)*: ");
     task1->status = getchar();
-    if (task1->status == '\n')
-        task1->status = 32;
+    while ((task1->status != '~') && (task1->status != '-'))
+    {
+        while (getchar() != '\n');
+        printf("Введите корректный статус: ");
+        task1->status = getchar();
+    }
     while (getchar() != '\n')
         ;
 }
@@ -127,6 +131,7 @@ void deadline_edit(task* task1)
     scanf("%d", &task1->day);
     while (day_check(task1->day) == -1) {
         printf("Введите корректную дату(день): ");
+        printf("%d\n", task1->day);
         scanf("%d", &task1->day);
     }
     if (task1->day == 0) {
@@ -150,21 +155,52 @@ void deadline_edit(task* task1)
 
 void priority_edit(task* task1)
 {
-    int count = 0;
-
+    int i, count = 0;
     printf("Введите приоритет дела(* - низкий, ** - средний, *** - "
            "высокий)*: ");
     fgetc(stdin);
     fgets(task1->priority, 4, stdin);
-    for (int i = 0; i < 4; i++) {
-        if (task1->priority[i] == 10)
-            task1->priority[i] = 32;
-        if (task1->priority[i] == 32)
-            count++;
+    task1->priority[3] = '\0';
+    for(i = 0; i < 3; i++)
+    {
+        if(task1->priority[i] == '\n')
+            task1->priority[i] = ' ';
+        if(task1->priority[i] == 0)
+            task1->priority[i] = ' ';
+    }
+    while (((task1->priority[0] != '*') && (task1->priority[0] != ' '))
+        || ((task1->priority[1] != '*') && (task1->priority[1] != ' '))
+        || ((task1->priority[2] != '*') && (task1->priority[2] != ' ')))
+    {
+        printf("Введите корректный приоритет: ");
+        count = 0;
+        for (i = 0; i < 3; i++) {
+            if (task1->priority[i] == 10)
+                task1->priority[i] = 32;
+            if (task1->priority[i] == 32)
+                count++;
+        }
+        if (count == 0)
+            while (getchar() != '\n');
+        fgets(task1->priority, 4, stdin);
+        for (i = 0; i < 4; i++) {
+            if(task1->priority[i] == '\n')
+                task1->priority[i] = ' ';
+            if(task1->priority[i] == 0)
+                task1->priority[i] = ' ';
+        }
+    }
+    count = 0;
+    for (int i = 0; i < 3; i++) {
+    if (task1->priority[i] == 10)
+        task1->priority[i] = 32;
+    if (task1->priority[i] == 32)
+        count++;
     }
     if (count == 0)
-        while (getchar() != '\n')
-            ;
+    while (getchar() != '\n')
+        ;
+    task1->priority[3] = '\0';
 }
 
 void category_edit(task* task1)
@@ -439,7 +475,7 @@ int day_check(int day)
 {
     if (day == 0)
         return 2;
-    if (isdigit(day) == 0 && day > 0 && day < 32)
+    if (day > 0 && day < 32)
         return 1;
     return -1;
 }
