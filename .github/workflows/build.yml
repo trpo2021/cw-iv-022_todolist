@@ -14,9 +14,18 @@ jobs:
 
       - name: todo
         run: make
-        
+
       - name: Build test
         run: make test
 
       - name: Run test
         run: bin/test
+        run: Name
+        run: Description
+        run: ~
+        run: 1
+        run: 1
+        run: 2020
+        run: ***
+        run: Category
+        run: 10
