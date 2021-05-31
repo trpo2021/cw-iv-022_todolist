@@ -1,5 +1,7 @@
 OFLAGS=gcc -Wall -c -Werror -o
 BINFLAGS=gcc -Wall -Werror -o
+TESTFLAGS=gcc -Wall -I thirdparty -I src -Werror -o
+OTESTFLAGS=gcc -Wall -I thirdparty -I src -Werror -c -o
 
 all: bin/todo
 bin/todo: obj/src/main_menu.o obj/src/main.o obj/src/todo_list.o obj/src/bin.o obj/src/archive.o obj/src/libtodo.a
@@ -20,13 +22,11 @@ obj/src/archive.o: src/archive.c
 test: bin/test
 
 bin/test: obj/test/tests.o obj/test/main.o obj/src/libtodo.a
-	gcc -Wall -I thirdparty -I src -Werror -o bin/test obj/test/tests.o obj/test/main.o obj/src/libtodo.a
-
+	$(TESTFLAGS) $@ $^
 obj/test/main.o: test/main.c
-	gcc -Wall -I thirdparty -I src -Werror -c -o obj/test/main.o test/main.c
-
+	$(OTESTFLAGS) $@ $^
 obj/test/tests.o: test/tests.c
-	gcc -Wall -I thirdparty -I src -Werror -c -o obj/test/tests.o test/tests.c
+	$(OTESTFLAGS) $@ $^
 
 .PHONY : clean
 clean:
