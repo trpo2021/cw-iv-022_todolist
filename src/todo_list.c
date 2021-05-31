@@ -125,7 +125,7 @@ void deadline_edit(task* task1)
     printf("Введите крайний срок(через пробел: день месяц год, 0 - если "
            "бессрочное): ");
     scanf("%d", &task1->day);
-    if (day_check(task1->day) == -1) {
+    while (day_check(task1->day) == -1) {
         printf("Введите корректную дату(день): ");
         scanf("%d", &task1->day);
     }

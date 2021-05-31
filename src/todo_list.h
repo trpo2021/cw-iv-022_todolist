@@ -1,8 +1,8 @@
 #pragma once
 
+#include <ctype.h>
 #include <locale.h>
 #include <stdio.h>
-#include <ctype.h>
 #include <string.h>
 
 typedef struct {

@@ -1,13 +1,12 @@
 #include "ctest.h"
-#include <todo_list.h>
 #include <archive.h>
 #include <bin.h>
+#include <todo_list.h>
 
-FILE* file[10]
-            = {NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL};
+FILE* file[10] = {NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL};
 
 CTEST(find_ids, id_1)
-{   
+{
     file[0] = fopen("test/users/user1.txt", "r+");
     int result = find_id(file[0]);
     int expected = 2;
@@ -16,7 +15,7 @@ CTEST(find_ids, id_1)
 }
 
 CTEST(find_ids, id_2)
-{   
+{
     file[0] = fopen("test/users/user2.txt", "r+");
     int result = find_id(file[0]);
     int expected = 1;
@@ -25,7 +24,7 @@ CTEST(find_ids, id_2)
 }
 
 CTEST(find_ids, id_3)
-{   
+{
     file[0] = fopen("test/users/user3.txt", "r+");
     int result = find_id(file[0]);
     int expected = 100;
@@ -34,7 +33,7 @@ CTEST(find_ids, id_3)
 }
 
 CTEST(day_checks, dcheck_1)
-{   
+{
     int day = 1;
     int result = day_check(day);
     int expected = 1;
@@ -42,7 +41,7 @@ CTEST(day_checks, dcheck_1)
 }
 
 CTEST(day_checks, dcheck_2)
-{   
+{
     int day = 01;
     int result = day_check(day);
     int expected = 1;
@@ -50,7 +49,7 @@ CTEST(day_checks, dcheck_2)
 }
 
 CTEST(day_checks, dcheck_3)
-{   
+{
     int day = -1;
     int result = day_check(day);
     int expected = -1;
@@ -58,7 +57,7 @@ CTEST(day_checks, dcheck_3)
 }
 
 CTEST(day_checks, dcheck_4)
-{   
+{
     int day = 'a';
     int result = day_check(day);
     int expected = -1;
@@ -66,7 +65,7 @@ CTEST(day_checks, dcheck_4)
 }
 
 CTEST(day_checks, dcheck_5)
-{   
+{
     int day = 32;
     int result = day_check(day);
     int expected = -1;
@@ -74,7 +73,7 @@ CTEST(day_checks, dcheck_5)
 }
 
 CTEST(day_checks, dcheck_6)
-{   
+{
     int day = 0;
     int result = day_check(day);
     int expected = -1;
@@ -82,7 +81,7 @@ CTEST(day_checks, dcheck_6)
 }
 
 CTEST(day_checks, dcheck_7)
-{   
+{
     int day = 50;
     int result = day_check(day);
     int expected = -1;
@@ -90,7 +89,7 @@ CTEST(day_checks, dcheck_7)
 }
 
 CTEST(day_checks, dcheck_8)
-{   
+{
     int day = 31;
     int result = day_check(day);
     int expected = 1;
@@ -98,7 +97,7 @@ CTEST(day_checks, dcheck_8)
 }
 
 CTEST(month_checks, mcheck_1)
-{   
+{
     int month = 1;
     int result = month_check(month);
     int expected = 1;
@@ -106,7 +105,7 @@ CTEST(month_checks, mcheck_1)
 }
 
 CTEST(month_checks, mcheck_2)
-{   
+{
     int month = 0;
     int result = month_check(month);
     int expected = -1;
@@ -114,7 +113,7 @@ CTEST(month_checks, mcheck_2)
 }
 
 CTEST(month_checks, mcheck_3)
-{   
+{
     int month = -1;
     int result = month_check(month);
     int expected = -1;
@@ -122,7 +121,7 @@ CTEST(month_checks, mcheck_3)
 }
 
 CTEST(month_checks, mcheck_4)
-{   
+{
     int month = 12;
     int result = month_check(month);
     int expected = 1;
@@ -130,7 +129,7 @@ CTEST(month_checks, mcheck_4)
 }
 
 CTEST(month_checks, mcheck_5)
-{   
+{
     int month = 13;
     int result = month_check(month);
     int expected = -1;
@@ -138,7 +137,7 @@ CTEST(month_checks, mcheck_5)
 }
 
 CTEST(month_checks, mcheck_6)
-{   
+{
     int month = 'a';
     int result = month_check(month);
     int expected = -1;
@@ -146,7 +145,7 @@ CTEST(month_checks, mcheck_6)
 }
 
 CTEST(month_checks, mcheck_7)
-{   
+{
     int month = 6;
     int result = month_check(month);
     int expected = 1;
@@ -154,7 +153,7 @@ CTEST(month_checks, mcheck_7)
 }
 
 CTEST(year_checks, ycheck_1)
-{   
+{
     int year = 2020;
     int result = year_check(year);
     int expected = 1;
@@ -162,7 +161,7 @@ CTEST(year_checks, ycheck_1)
 }
 
 CTEST(year_checks, ycheck_2)
-{   
+{
     int year = 1000;
     int result = year_check(year);
     int expected = -1;
@@ -170,7 +169,7 @@ CTEST(year_checks, ycheck_2)
 }
 
 CTEST(year_checks, ycheck_3)
-{   
+{
     int year = 1001;
     int result = year_check(year);
     int expected = 1;
@@ -178,7 +177,7 @@ CTEST(year_checks, ycheck_3)
 }
 
 CTEST(year_checks, ycheck_4)
-{   
+{
     int year = 3000;
     int result = year_check(year);
     int expected = -1;
@@ -186,7 +185,7 @@ CTEST(year_checks, ycheck_4)
 }
 
 CTEST(year_checks, ycheck_5)
-{   
+{
     int year = 2999;
     int result = year_check(year);
     int expected = 1;
@@ -194,7 +193,7 @@ CTEST(year_checks, ycheck_5)
 }
 
 CTEST(year_checks, ycheck_6)
-{   
+{
     int year = 'y';
     int result = year_check(year);
     int expected = -1;
@@ -202,7 +201,7 @@ CTEST(year_checks, ycheck_6)
 }
 
 CTEST(year_checks, ycheck_7)
-{   
+{
     int year = -2020;
     int result = year_check(year);
     int expected = -1;
@@ -210,7 +209,7 @@ CTEST(year_checks, ycheck_7)
 }
 
 CTEST(move_to_archive_checks, mtacheck_1)
-{   
+{
     task tasks[10];
     file[0] = fopen("test/users/user1.txt", "r+");
     file[2] = fopen("test/users/user1archive.txt", "r+");
@@ -225,7 +224,7 @@ CTEST(move_to_archive_checks, mtacheck_1)
 }
 
 CTEST(move_to_archive_checks, mtacheck_2)
-{   
+{
     task tasks[10];
     file[0] = fopen("test/users/user1.txt", "r+");
     file[2] = fopen("test/users/user1archive.txt", "r+");
@@ -240,7 +239,7 @@ CTEST(move_to_archive_checks, mtacheck_2)
 }
 
 CTEST(move_to_archive_checks, mtacheck_3)
-{   
+{
     task tasks[10];
     file[0] = fopen("test/users/user1.txt", "r+");
     file[2] = fopen("test/users/user1archive.txt", "r+");
@@ -255,7 +254,7 @@ CTEST(move_to_archive_checks, mtacheck_3)
 }
 
 CTEST(move_to_archive_checks, mtacheck_4)
-{   
+{
     task tasks[10];
     file[0] = fopen("test/users/user1.txt", "r+");
     file[2] = fopen("test/users/user1archive.txt", "r+");
@@ -270,7 +269,7 @@ CTEST(move_to_archive_checks, mtacheck_4)
 }
 
 CTEST(move_to_archive_checks, mtacheck_5)
-{   
+{
     task tasks[10];
     file[0] = fopen("test/users/user1.txt", "r+");
     file[2] = fopen("test/users/user1archive.txt", "r+");
@@ -287,7 +286,7 @@ CTEST(move_to_archive_checks, mtacheck_5)
 }
 
 CTEST(move_to_archive_checks, mtacheck_6)
-{   
+{
     task tasks[10];
     file[0] = fopen("test/users/user1.txt", "r+");
     file[2] = fopen("test/users/user1archive.txt", "r+");
@@ -304,7 +303,7 @@ CTEST(move_to_archive_checks, mtacheck_6)
 }
 
 CTEST(move_to_archive_checks, mtacheck_7)
-{   
+{
     task tasks[10];
     file[0] = fopen("test/users/user1.txt", "r+");
     file[2] = fopen("test/users/user1archive.txt", "r+");
@@ -321,7 +320,7 @@ CTEST(move_to_archive_checks, mtacheck_7)
 }
 
 CTEST(move_to_archive_checks, mtacheck_8)
-{   
+{
     task tasks[10];
     file[0] = fopen("test/users/user1.txt", "r+");
     file[2] = fopen("test/users/user1archive.txt", "r+");
@@ -338,7 +337,7 @@ CTEST(move_to_archive_checks, mtacheck_8)
 }
 
 CTEST(move_to_archive_checks, mtacheck_9)
-{   
+{
     task tasks[10];
     file[0] = fopen("test/users/user1.txt", "r+");
     file[2] = fopen("test/users/user1archive.txt", "r+");
@@ -357,7 +356,7 @@ CTEST(move_to_archive_checks, mtacheck_9)
 }
 
 CTEST(move_to_bin_checks, mtbcheck_1)
-{   
+{
     task tasks[10];
     file[0] = fopen("test/users/user1.txt", "r+");
     file[1] = fopen("test/users/user1bin.txt", "r+");
@@ -372,7 +371,7 @@ CTEST(move_to_bin_checks, mtbcheck_1)
 }
 
 CTEST(move_to_bin_checks, mtbcheck_2)
-{   
+{
     task tasks[10];
     file[0] = fopen("test/users/user1.txt", "r+");
     file[1] = fopen("test/users/user1bin.txt", "r+");
@@ -387,7 +386,7 @@ CTEST(move_to_bin_checks, mtbcheck_2)
 }
 
 CTEST(move_to_bin_checks, mtbcheck_3)
-{   
+{
     task tasks[10];
     file[0] = fopen("test/users/user1.txt", "r+");
     file[1] = fopen("test/users/user1bin.txt", "r+");
@@ -402,7 +401,7 @@ CTEST(move_to_bin_checks, mtbcheck_3)
 }
 
 CTEST(move_to_bin_checks, mtbcheck_4)
-{   
+{
     task tasks[10];
     file[0] = fopen("test/users/user1.txt", "r+");
     file[1] = fopen("test/users/user1bin.txt", "r+");
@@ -417,7 +416,7 @@ CTEST(move_to_bin_checks, mtbcheck_4)
 }
 
 CTEST(move_to_bin_checks, mtbcheck_5)
-{   
+{
     task tasks[10];
     file[0] = fopen("test/users/user1.txt", "r+");
     file[1] = fopen("test/users/user1bin.txt", "r+");
@@ -434,7 +433,7 @@ CTEST(move_to_bin_checks, mtbcheck_5)
 }
 
 CTEST(move_to_bin_checks, mtbcheck_6)
-{   
+{
     task tasks[10];
     file[0] = fopen("test/users/user1.txt", "r+");
     file[1] = fopen("test/users/user1bin.txt", "r+");
@@ -451,7 +450,7 @@ CTEST(move_to_bin_checks, mtbcheck_6)
 }
 
 CTEST(move_to_bin_checks, mtbcheck_7)
-{   
+{
     task tasks[10];
     file[0] = fopen("test/users/user1.txt", "r+");
     file[1] = fopen("test/users/user1bin.txt", "r+");
@@ -468,7 +467,7 @@ CTEST(move_to_bin_checks, mtbcheck_7)
 }
 
 CTEST(move_to_bin_checks, mtbcheck_8)
-{   
+{
     task tasks[10];
     file[0] = fopen("test/users/user1.txt", "r+");
     file[1] = fopen("test/users/user1bin.txt", "r+");
@@ -485,7 +484,7 @@ CTEST(move_to_bin_checks, mtbcheck_8)
 }
 
 CTEST(move_to_bin_checks, mtbcheck_9)
-{   
+{
     task tasks[10];
     file[0] = fopen("test/users/user1.txt", "r+");
     file[1] = fopen("test/users/user1bin.txt", "r+");
@@ -504,7 +503,7 @@ CTEST(move_to_bin_checks, mtbcheck_9)
 }
 
 CTEST(duplication_checks, duplcheck_1)
-{   
+{
     task tasks[10];
     file[0] = fopen("test/users/user4.txt", "r+");
     task_scan(file[0], &tasks[1], 1);
@@ -517,7 +516,7 @@ CTEST(duplication_checks, duplcheck_1)
 }
 
 CTEST(duplication_checks, duplcheck_2)
-{   
+{
     task tasks[10];
     file[0] = fopen("test/users/user4.txt", "r+");
     task_scan(file[0], &tasks[1], 1);
@@ -530,7 +529,7 @@ CTEST(duplication_checks, duplcheck_2)
 }
 
 CTEST(duplication_checks, duplcheck_3)
-{   
+{
     task tasks[10];
     file[0] = fopen("test/users/user4.txt", "r+");
     task_scan(file[0], &tasks[1], 1);
@@ -543,7 +542,7 @@ CTEST(duplication_checks, duplcheck_3)
 }
 
 CTEST(duplication_checks, duplcheck_4)
-{   
+{
     task tasks[10];
     file[0] = fopen("test/users/user4.txt", "r+");
     task_scan(file[0], &tasks[1], 1);
@@ -556,7 +555,7 @@ CTEST(duplication_checks, duplcheck_4)
 }
 
 CTEST(duplication_checks, duplcheck_5)
-{   
+{
     task tasks[10];
     file[0] = fopen("test/users/user4.txt", "r+");
     task_scan(file[0], &tasks[1], 1);
@@ -571,7 +570,7 @@ CTEST(duplication_checks, duplcheck_5)
 }
 
 CTEST(duplication_checks, duplcheck_6)
-{   
+{
     task tasks[10];
     file[0] = fopen("test/users/user4.txt", "r+");
     task_scan(file[0], &tasks[1], 1);
@@ -586,7 +585,7 @@ CTEST(duplication_checks, duplcheck_6)
 }
 
 CTEST(duplication_checks, duplcheck_7)
-{   
+{
     task tasks[10];
     file[0] = fopen("test/users/user4.txt", "r+");
     task_scan(file[0], &tasks[1], 1);
@@ -601,7 +600,7 @@ CTEST(duplication_checks, duplcheck_7)
 }
 
 CTEST(duplication_checks, duplcheck_8)
-{   
+{
     task tasks[10];
     file[0] = fopen("test/users/user4.txt", "r+");
     task_scan(file[0], &tasks[1], 1);
@@ -616,7 +615,7 @@ CTEST(duplication_checks, duplcheck_8)
 }
 
 CTEST(duplication_checks, duplcheck_9)
-{   
+{
     task tasks[10];
     file[0] = fopen("test/users/user4.txt", "r+");
     task_scan(file[0], &tasks[1], 1);
@@ -630,10 +629,10 @@ CTEST(duplication_checks, duplcheck_9)
         result = 1;
     ASSERT_EQUAL(expected, result);
     fclose(file[0]);
-}   
+}
 
 CTEST(write_in_file_tests, write_check_1)
-{   
+{
     task tasks[10];
     file[0] = fopen("test/users/user4.txt", "r+");
 
@@ -658,7 +657,7 @@ CTEST(write_in_file_tests, write_check_1)
 }
 
 CTEST(write_in_file_tests, write_check_2)
-{   
+{
     task tasks[10];
     file[0] = fopen("test/users/user4.txt", "r+");
 
@@ -683,7 +682,7 @@ CTEST(write_in_file_tests, write_check_2)
 }
 
 CTEST(write_in_file_tests, write_check_3)
-{   
+{
     task tasks[10];
     file[0] = fopen("test/users/user4.txt", "r+");
 
@@ -708,7 +707,7 @@ CTEST(write_in_file_tests, write_check_3)
 }
 
 CTEST(write_in_file_tests, write_check_4)
-{   
+{
     task tasks[10];
     file[0] = fopen("test/users/user4.txt", "r+");
 
@@ -731,7 +730,7 @@ CTEST(write_in_file_tests, write_check_4)
 }
 
 CTEST(write_in_file_tests, write_check_5)
-{   
+{
     task tasks[10];
     file[0] = fopen("test/users/user4.txt", "r+");
 
@@ -756,7 +755,7 @@ CTEST(write_in_file_tests, write_check_5)
 }
 
 CTEST(write_in_file_tests, write_check_6)
-{   
+{
     task tasks[10];
     file[0] = fopen("test/users/user4.txt", "r+");
 
@@ -777,7 +776,7 @@ CTEST(write_in_file_tests, write_check_6)
 }
 
 CTEST(write_in_file_tests, write_check_7)
-{   
+{
     task tasks[10];
     file[0] = fopen("test/users/user4.txt", "r+");
 
@@ -798,7 +797,7 @@ CTEST(write_in_file_tests, write_check_7)
 }
 
 CTEST(write_in_file_tests, write_check_8)
-{   
+{
     task tasks[10];
     file[0] = fopen("test/users/user4.txt", "r+");
 
@@ -819,7 +818,7 @@ CTEST(write_in_file_tests, write_check_8)
 }
 
 CTEST(write_in_file_tests, write_check_9)
-{   
+{
     task tasks[10];
     file[0] = fopen("test/users/user4.txt", "r+");
 
@@ -840,7 +839,7 @@ CTEST(write_in_file_tests, write_check_9)
 }
 
 CTEST(task_scans, scan_check_1)
-{   
+{
     task tasks[10];
     file[0] = fopen("test/users/user1.txt", "r+");
     char expected[30] = "Name";
@@ -851,7 +850,7 @@ CTEST(task_scans, scan_check_1)
 }
 
 CTEST(task_scans, scan_check_2)
-{   
+{
     task tasks[10];
     file[0] = fopen("test/users/user1.txt", "r+");
     char expected[20] = "Category";
@@ -862,7 +861,7 @@ CTEST(task_scans, scan_check_2)
 }
 
 CTEST(task_scans, scan_check_3)
-{   
+{
     task tasks[10];
     file[0] = fopen("test/users/user1.txt", "r+");
     char expected[80] = "Description";
@@ -873,7 +872,7 @@ CTEST(task_scans, scan_check_3)
 }
 
 CTEST(task_scans, scan_check_4)
-{   
+{
     task tasks[10];
     file[0] = fopen("test/users/user1.txt", "r+");
     char expected[4] = "***";
@@ -883,7 +882,7 @@ CTEST(task_scans, scan_check_4)
 }
 
 CTEST(task_scans, scan_check_5)
-{   
+{
     task tasks[10];
     file[0] = fopen("test/users/user1.txt", "r+");
     char status = '~';
@@ -891,13 +890,13 @@ CTEST(task_scans, scan_check_5)
     int expected = 1;
     int result = -1;
     if (status == tasks[1].status)
-    	result = 1;
+        result = 1;
     ASSERT_EQUAL(result, expected);
     fclose(file[0]);
 }
 
 CTEST(task_scans, scan_check_6)
-{   
+{
     task tasks[10];
     file[0] = fopen("test/users/user1.txt", "r+");
     int expected = 1;
@@ -907,7 +906,7 @@ CTEST(task_scans, scan_check_6)
 }
 
 CTEST(task_scans, scan_check_7)
-{   
+{
     task tasks[10];
     file[0] = fopen("test/users/user1.txt", "r+");
     int expected = 1;
@@ -917,7 +916,7 @@ CTEST(task_scans, scan_check_7)
 }
 
 CTEST(task_scans, scan_check_8)
-{   
+{
     task tasks[10];
     file[0] = fopen("test/users/user1.txt", "r+");
     int expected = 2020;
@@ -927,7 +926,7 @@ CTEST(task_scans, scan_check_8)
 }
 
 CTEST(task_scans, scan_check_9)
-{   
+{
     task tasks[10];
     file[0] = fopen("test/users/user1.txt", "r+");
     int expected = 10;
@@ -937,7 +936,7 @@ CTEST(task_scans, scan_check_9)
 }
 
 CTEST(task_scans, scan_check_10)
-{   
+{
     task tasks[10];
     file[0] = fopen("test/users/user1.txt", "r+");
     int expected = 1;
@@ -947,7 +946,7 @@ CTEST(task_scans, scan_check_10)
 }
 
 CTEST(cleans, clean_archive)
-{   
+{
     clean_archive(file);
     int result = find_id(file[2]);
     int expected = 1;
@@ -956,7 +955,7 @@ CTEST(cleans, clean_archive)
 }
 
 CTEST(cleans, clean_bin)
-{   
+{
     clean_bin(file);
     int result = find_id(file[1]);
     int expected = 1;
@@ -965,9 +964,9 @@ CTEST(cleans, clean_bin)
 }
 
 CTEST(edits, name_edit)
-{   
-	task tasks[10];
-	file[0] = fopen("test/users/test.txt", "w+");
+{
+    task tasks[10];
+    file[0] = fopen("test/users/test.txt", "w+");
     strcpy(tasks[0].name, "Name");
     strcpy(tasks[0].description, "Description");
     strcpy(tasks[0].category, "Category");
@@ -977,11 +976,11 @@ CTEST(edits, name_edit)
     tasks[0].month = 1;
     tasks[0].year = 2020;
     tasks[0].progress = 10;
-	name_edit(&tasks[0]);
+    name_edit(&tasks[0]);
     write_in_file(file[0], &tasks[0], 1);
-	char tmp[30];
-	strcpy(tmp, tasks[0].name);
-	task_scan(file[0], &tasks[0], 1);
+    char tmp[30];
+    strcpy(tmp, tasks[0].name);
+    task_scan(file[0], &tasks[0], 1);
     for (int i = 0; i < 30; ++i)
         if (tmp[i] == ' ')
             tmp[i] = '\0';
@@ -993,7 +992,7 @@ CTEST(edits, name_edit)
 }
 
 CTEST(edits, description_edit)
-{   
+{
     task tasks[10];
     file[0] = fopen("test/users/test.txt", "w+");
     strcpy(tasks[0].name, "Name");
@@ -1021,7 +1020,7 @@ CTEST(edits, description_edit)
 }
 
 CTEST(edits, category_edit)
-{   
+{
     task tasks[10];
     file[0] = fopen("test/users/test.txt", "w+");
     strcpy(tasks[0].name, "Name");
@@ -1049,7 +1048,7 @@ CTEST(edits, category_edit)
 }
 
 CTEST(edits, priority_edit)
-{   
+{
     task tasks[10];
     file[0] = fopen("test/users/test.txt", "w+");
     strcpy(tasks[0].name, "Name");
@@ -1077,7 +1076,7 @@ CTEST(edits, priority_edit)
 }
 
 CTEST(edits, status_edit)
-{   
+{
     task tasks[10];
     file[0] = fopen("test/users/test.txt", "w+");
     strcpy(tasks[0].name, "Name");
@@ -1102,7 +1101,7 @@ CTEST(edits, status_edit)
 }
 
 CTEST(edits, deadline_edit)
-{   
+{
     task tasks[10];
     file[0] = fopen("test/users/test.txt", "w+");
     strcpy(tasks[0].name, "Name");
@@ -1133,7 +1132,7 @@ CTEST(edits, deadline_edit)
 }
 
 CTEST(edits, progress_edit)
-{   
+{
     task tasks[10];
     file[0] = fopen("test/users/test.txt", "w+");
     strcpy(tasks[0].name, "Name");
@@ -1154,7 +1153,7 @@ CTEST(edits, progress_edit)
 }
 
 CTEST(reset_test_user_files, reset_test_user_files)
-{   
+{
     file[0] = fopen("test/users/user1archive.txt", "w+");
     file[0] = fopen("test/users/user1bin.txt", "w+");
     file[0] = fopen("test/users/user4.txt", "w+");
@@ -1169,6 +1168,6 @@ CTEST(reset_test_user_files, reset_test_user_files)
     tasks[1].year = 2020;
     tasks[1].progress = 10;
     write_in_file(file[0], &tasks[1], find_id(file[0]));
-    //file[0] = fopen("test/users/test.txt", "w+");
+    // file[0] = fopen("test/users/test.txt", "w+");
     fclose(file[0]);
 }
