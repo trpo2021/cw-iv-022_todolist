@@ -39,6 +39,7 @@ void todolist(FILE* file[10])
             move_to_archive(file, id);
             break;
         case 5:
+            sort(file[0], id);
             break;
         case 6:
             break;
