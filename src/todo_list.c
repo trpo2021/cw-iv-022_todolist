@@ -124,31 +124,51 @@ void status_edit(task* task1)
         ;
 }
 
+void clear_stdin()
+{
+    int trash;
+    do {
+        trash = getchar();
+    } while (trash != '\n' && trash != EOF);
+}
+
 void deadline_edit(task* task1)
 {
+    int day, month, year;
     printf("Введите крайний срок(через пробел: день месяц год, 0 - если "
            "бессрочное): ");
-    scanf("%d", &task1->day);
+    day = scanf("%d", &task1->day);
+    if (day == 0)
+        clear_stdin();
     while (day_check(task1->day) == -1) {
         printf("Введите корректную дату(день): ");
-        printf("%d\n", task1->day);
-        scanf("%d", &task1->day);
+        day = scanf("%d", &task1->day);
+        if (day == 0)
+            clear_stdin();
     }
     if (task1->day == 0) {
         task1->month = 0;
         task1->year = 0;
     } else {
         printf("Введите месяц: ");
-        scanf("%d", &task1->month);
+        month = scanf("%d", &task1->month);
+        if (month == 0)
+            clear_stdin();
         while (month_check(task1->month) == -1) {
             printf("Введите корректную дату(месяц): ");
-            scanf("%d", &task1->month);
+            month = scanf("%d", &task1->month);
+            if (month == 0)
+                clear_stdin();
         }
         printf("Введите год: ");
-        scanf("%d", &task1->year);
+        year = scanf("%d", &task1->year);
+        if (year == 0)
+            clear_stdin();
         while (year_check(task1->year) == -1) {
             printf("Введите корректную дату(год): ");
-            scanf("%d", &task1->year);
+            year = scanf("%d", &task1->year);
+            if (year == 0)
+                clear_stdin();
         }
     }
 }
@@ -220,12 +240,17 @@ void category_edit(task* task1)
 
 void progress_edit(task* task1)
 {
+    int progress;
     if (task1->status != 45) {
         printf("Введите прогресс выполнения(в процентах): ");
-        scanf("%d", &task1->progress);
+        progress = scanf("%d", &task1->progress);
+        if (progress == 0)
+            clear_stdin();
         while (task1->progress > 100) {
             printf("Введите корректный прогресс выполнения(в процентах): ");
-            scanf("%d", &task1->progress);
+            progress = scanf("%d", &task1->progress);
+            if (progress == 0)
+                clear_stdin();
         }
     } else
         task1->progress = 0;

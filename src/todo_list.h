@@ -77,3 +77,5 @@ void sort_progress(FILE* file, int id);
 void sort_deadline(FILE* file, int id);
 
 void sort(FILE* file, int id);
+
+void clear_stdin();
