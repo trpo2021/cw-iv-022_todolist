@@ -1,0 +1,7 @@
+obj/src/*.o
+obj/src/*.a
+obj/test/*.o
+users/*.txt
+bin/todo
+bin/test
+test/users/test.txt
