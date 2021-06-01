@@ -8,7 +8,7 @@ void add(FILE* file[10])
     fseek(file[0], 0, SEEK_END);
     setlocale(LC_ALL, "Russian");
 
-    printf("'*' помечены обязательные пункты\n");
+    printf("'*' required fields\n");
     name_edit(&task1);
 
     description_edit(&task1);
@@ -79,7 +79,7 @@ int find_id(FILE* file) // Поиск id для нового дела
 void name_edit(task* task1)
 {
     int count = 0;
-    printf("Введите название дела*: ");
+    printf("Input the name task*: ");
     fgetc(stdin);
     fgets(task1->name, 30, stdin);
 
@@ -97,7 +97,7 @@ void name_edit(task* task1)
 void description_edit(task* task1)
 {
     int count = 0;
-    printf("Введите описание дела: ");
+    printf("Input the task description: ");
     fgets(task1->description, 80, stdin);
     for (int i = 0; i < 80; i++) {
         if (task1->description[i] == 10)
@@ -112,12 +112,12 @@ void description_edit(task* task1)
 
 void status_edit(task* task1)
 {
-    printf("Введите статус выполнения('-' не начал, '~' в процессе)*: ");
+    printf("Input status('-' not begin, '~' in progress)*: ");
     task1->status = getchar();
     while ((task1->status != '~') && (task1->status != '-')) {
         while (getchar() != '\n')
             ;
-        printf("Введите корректный статус: ");
+        printf("Input the correct status: ");
         task1->status = getchar();
     }
     while (getchar() != '\n')
@@ -135,13 +135,13 @@ void clear_stdin()
 void deadline_edit(task* task1)
 {
     int day, month, year;
-    printf("Введите крайний срок(через пробел: день месяц год, 0 - если "
-           "бессрочное): ");
+    printf("Input deadline(day, 0 - if "
+           "endless): ");
     day = scanf("%d", &task1->day);
     if (day == 0)
         clear_stdin();
     while (day_check(task1->day) == -1) {
-        printf("Введите корректную дату(день): ");
+        printf("Input the correct date(day): ");
         day = scanf("%d", &task1->day);
         if (day == 0)
             clear_stdin();
@@ -150,22 +150,22 @@ void deadline_edit(task* task1)
         task1->month = 0;
         task1->year = 0;
     } else {
-        printf("Введите месяц: ");
+        printf("Input month: ");
         month = scanf("%d", &task1->month);
         if (month == 0)
             clear_stdin();
         while (month_check(task1->month) == -1) {
-            printf("Введите корректную дату(месяц): ");
+            printf("Input rhe correct date(month): ");
             month = scanf("%d", &task1->month);
             if (month == 0)
                 clear_stdin();
         }
-        printf("Введите год: ");
+        printf("Input year: ");
         year = scanf("%d", &task1->year);
         if (year == 0)
             clear_stdin();
         while (year_check(task1->year) == -1) {
-            printf("Введите корректную дату(год): ");
+            printf("Input the correct date(year): ");
             year = scanf("%d", &task1->year);
             if (year == 0)
                 clear_stdin();
@@ -176,8 +176,8 @@ void deadline_edit(task* task1)
 void priority_edit(task* task1)
 {
     int i, count = 0;
-    printf("Введите приоритет дела(* - низкий, ** - средний, *** - "
-           "высокий)*: ");
+    printf("Input the task priority(* - low, ** - medium, *** - "
+           "high)*: ");
     fgetc(stdin);
     fgets(task1->priority, 4, stdin);
     task1->priority[3] = '\0';
@@ -190,7 +190,7 @@ void priority_edit(task* task1)
     while (((task1->priority[0] != '*') && (task1->priority[0] != ' '))
            || ((task1->priority[1] != '*') && (task1->priority[1] != ' '))
            || ((task1->priority[2] != '*') && (task1->priority[2] != ' '))) {
-        printf("Введите корректный приоритет: ");
+        printf("Input the correct task priority: ");
         count = 0;
         for (i = 0; i < 3; i++) {
             if (task1->priority[i] == 10)
@@ -225,7 +225,7 @@ void priority_edit(task* task1)
 void category_edit(task* task1)
 {
     int count = 0;
-    printf("Введите категорию дела: ");
+    printf("Input the task category: ");
     fgets(task1->category, 20, stdin);
     for (int i = 0; i < 20; i++) {
         if (task1->category[i] == 10)
@@ -242,12 +242,12 @@ void progress_edit(task* task1)
 {
     int progress;
     if (task1->status != 45) {
-        printf("Введите прогресс выполнения(в процентах): ");
+        printf("Input the task progress(%%): ");
         progress = scanf("%d", &task1->progress);
         if (progress == 0)
             clear_stdin();
         while (task1->progress > 100) {
-            printf("Введите корректный прогресс выполнения(в процентах): ");
+            printf("Input the correct task progress(%%): ");
             progress = scanf("%d", &task1->progress);
             if (progress == 0)
                 clear_stdin();
@@ -271,7 +271,6 @@ void replacement(FILE* file, task* task1, int id)
 
 void task_scan(FILE* file, task* task1, int id)
 {
-    setlocale(LC_ALL, "Russian");
     char c = 0, v = 0, b = 0;
     char string[250];
     int i = 0, j = 0;
@@ -399,14 +398,14 @@ void edit(FILE* file, int id)
 
     int number;
     do {
-        printf("1. Изменить название\n");
-        printf("2. Изменить описание\n");
-        printf("3. Изменить статус выполнения\n");
-        printf("4. Изменить крайний срок\n");
-        printf("5. Изменить приоритет\n");
-        printf("6. Изменить категорию\n");
-        printf("7. Изменить прогресс\n");
-        printf("8. Выход в главное меню\n");
+        printf("1. Change name\n");
+        printf("2. Change description\n");
+        printf("3. Change status\n");
+        printf("4. Change deadline\n");
+        printf("5. Change priority\n");
+        printf("6. Change category\n");
+        printf("7. Change progress\n");
+        printf("8. Exit in todo list\n");
         scanf("%d", &number);
         switch (number) {
         case 1:
@@ -741,14 +740,14 @@ void sort(FILE* file, int id)
         fclose(file);
         file = fopen("users/user1.txt", "r+");
         read_tasks(file);
-        printf("1. Отсортировать по названию\n");
-        printf("2. Отсортировать по описанию\n");
-        printf("3. Отсортировать по статусу\n");
-        printf("4. Отсортировать по крайнему сроку\n");
-        printf("5. Отсортировать по приоритету\n");
-        printf("6. Отсортировать по категории\n");
-        printf("7. Отсортировать по прогрессу\n");
-        printf("8. Выход в главное меню\n");
+        printf("1. Sort by name\n");
+        printf("2. Sort by description\n");
+        printf("3. Sort by status\n");
+        printf("4. Sort by deadline\n");
+        printf("5. Sort by priority\n");
+        printf("6. Sort by category\n");
+        printf("7. Sort by progress\n");
+        printf("8. Exit in todo list\n");
         scanf("%d", &number);
         switch (number) {
         case 1:

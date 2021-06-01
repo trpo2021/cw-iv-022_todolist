@@ -16,12 +16,11 @@ int main()
     if (file[2] == NULL)
         file[2] = fopen("users/user1archive.txt", "w+");
     do {
-        printf("1. Список дел\n");
-        printf("2. Архив\n");
-        printf("3. Корзина\n");
-        printf("4. Настройки\n");
-        printf("5. Авторы\n");
-        printf("6. Сохранить и выйти\n");
+        printf("1. Todo list\n");
+        printf("2. Archive\n");
+        printf("3. Bin\n");
+        printf("4. Autors\n");
+        printf("5. Save and exit\n");
         scanf("%d", &number);
         switch (number) {
         case 1:
@@ -34,19 +33,16 @@ int main()
             bin(file);
             break;
         case 4:
-            settings();
-            break;
-        case 5:
             authors();
             break;
-        case 6:
+        case 5:
             for (i = 0; i < 10; i++) {
                 if ((file[i] != NULL) && (file[i] != 0))
                     fclose(file[i]);
             }
             break;
         }
-    } while (number != 6);
+    } while (number != 5);
 
     return 0;
 }
