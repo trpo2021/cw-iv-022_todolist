@@ -25,16 +25,40 @@ void todolist(FILE* file[10])
         case 2:
             printf("Input the task id: ");
             scanf("%d", &id);
+            if (id == 0)
+                clear_stdin();
+            while ((id < 1) || (id > 99)) {
+                printf("Input the correct id: ");
+                id = scanf("%d", &id);
+                if (id == 0)
+                    clear_stdin();
+            }
             move_to_bin(file, id);
             break;
         case 3:
             printf("Input the task id: ");
             scanf("%d", &id);
+            if (id == 0)
+                clear_stdin();
+            while ((id < 1) || (id > 99)) {
+                printf("Input the correct id: ");
+                id = scanf("%d", &id);
+                if (id == 0)
+                    clear_stdin();
+            }
             edit(file[0], id);
             break;
         case 4:
             printf("Input the task id: ");
             scanf("%d", &id);
+            if (id == 0)
+                clear_stdin();
+            while ((id < 1) || (id > 99)) {
+                printf("Input the correct id: ");
+                id = scanf("%d", &id);
+                if (id == 0)
+                    clear_stdin();
+            }
             move_to_archive(file, id);
             break;
         case 5:
@@ -43,6 +67,14 @@ void todolist(FILE* file[10])
         case 6:
             printf("Input the task id: ");
             scanf("%d", &id);
+            if (id == 0)
+                clear_stdin();
+            while ((id < 1) || (id > 99)) {
+                printf("Input the correct id: ");
+                id = scanf("%d", &id);
+                if (id == 0)
+                    clear_stdin();
+            }
             duplication(file, id);
             break;
         case 7:

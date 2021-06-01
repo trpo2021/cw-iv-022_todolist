@@ -20,6 +20,14 @@ void bin(FILE* file[10])
         case 1:
             printf("Input the task id: ");
             scanf("%d", &id);
+            if (id == 0)
+                clear_stdin();
+            while ((id < 1) || (id > 99)) {
+                printf("Input the correct id: ");
+                id = scanf("%d", &id);
+                if (id == 0)
+                    clear_stdin();
+            }
             delete_task(file, id);
             break;
         case 2:
@@ -28,6 +36,14 @@ void bin(FILE* file[10])
         case 3:
             printf("Input the task id: ");
             scanf("%d", &id);
+            if (id == 0)
+                clear_stdin();
+            while ((id < 1) || (id > 99)) {
+                printf("Input the correct id: ");
+                id = scanf("%d", &id);
+                if (id == 0)
+                    clear_stdin();
+            }
             restore_from_bin(file, id);
             break;
         case 4:

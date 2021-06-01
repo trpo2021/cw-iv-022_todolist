@@ -20,6 +20,14 @@ void archive(FILE* file[10])
         case 1:
             printf("Input the task id: ");
             scanf("%d", &id);
+            if (id == 0)
+                clear_stdin();
+            while ((id < 1) || (id > 99)) {
+                printf("Input the correct id: ");
+                id = scanf("%d", &id);
+                if (id == 0)
+                    clear_stdin();
+            }
             delete_task_from_the_archive(file, id);
             break;
         case 2:
@@ -28,6 +36,14 @@ void archive(FILE* file[10])
         case 3:
             printf("Input the task id: ");
             scanf("%d", &id);
+            if (id == 0)
+                clear_stdin();
+            while ((id < 1) || (id > 99)) {
+                printf("Input the correct id: ");
+                id = scanf("%d", &id);
+                if (id == 0)
+                    clear_stdin();
+            }
             unarchive(file, id);
             break;
         case 4:

@@ -155,7 +155,7 @@ void deadline_edit(task* task1)
         if (month == 0)
             clear_stdin();
         while (month_check(task1->month) == -1) {
-            printf("Input rhe correct date(month): ");
+            printf("Input the correct date(month): ");
             month = scanf("%d", &task1->month);
             if (month == 0)
                 clear_stdin();
