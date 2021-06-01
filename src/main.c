@@ -16,7 +16,7 @@ int main()
     if (file[2] == NULL)
         file[2] = fopen("users/user1archive.txt", "w+");
     do {
-        printf("1. Todo list\n");
+        printf("1. To do list\n");
         printf("2. Archive\n");
         printf("3. Bin\n");
         printf("4. Autors\n");

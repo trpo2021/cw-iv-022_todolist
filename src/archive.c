@@ -12,8 +12,8 @@ void archive(FILE* file[10])
         read_tasks(file[2]);
         printf("\n");
         printf("1. Move to bin\n");
-        printf("2. Clearing the archive\n");
-        printf("3. Unzipping task\n");
+        printf("2. Clear the archive\n");
+        printf("3. Unzip task\n");
         printf("4. Exit in main menu\n");
         scanf("%d", &number);
         switch (number) {
