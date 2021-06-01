@@ -6,37 +6,50 @@ void archive(FILE* file[10])
     int id, number;
 
     do {
-        printf("id            Название                                         "
-               "         Описание                                  Статус    "
-               "Дата    Приоритет       Категория          Прогресс\n");
+        printf("id            Task name                                      "
+               "      Description                                    Status "
+               "   Date    Priority       Category            Progress\n");
         read_tasks(file[2]);
         printf("\n");
-        printf("1. Удаление дела\n");
-        printf("2. Очистка архива\n");
-        printf("3. Разархивирование дела\n");
-        printf("4. Сортировка\n");
-        printf("5. Выход в главное меню\n");
+        printf("1. Move to bin\n");
+        printf("2. Clearing the archive\n");
+        printf("3. Unzipping task\n");
+        printf("4. Exit in main menu\n");
         scanf("%d", &number);
         switch (number) {
         case 1:
-            printf("Введите номер дела: ");
+            printf("Input the task id: ");
             scanf("%d", &id);
+            if (id == 0)
+                clear_stdin();
+            while ((id < 1) || (id > 99)) {
+                printf("Input the correct id: ");
+                id = scanf("%d", &id);
+                if (id == 0)
+                    clear_stdin();
+            }
             delete_task_from_the_archive(file, id);
             break;
         case 2:
             clean_archive(file);
             break;
         case 3:
-            printf("Введите номер дела: ");
+            printf("Input the task id: ");
             scanf("%d", &id);
+            if (id == 0)
+                clear_stdin();
+            while ((id < 1) || (id > 99)) {
+                printf("Input the correct id: ");
+                id = scanf("%d", &id);
+                if (id == 0)
+                    clear_stdin();
+            }
             unarchive(file, id);
             break;
         case 4:
             break;
-        case 5:
-            break;
         }
-    } while (number != 5);
+    } while (number != 4);
 }
 
 void delete_task_from_the_archive(FILE* file[10], int id)

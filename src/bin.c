@@ -6,37 +6,50 @@ void bin(FILE* file[10])
     int id, number;
 
     do {
-        printf("id            Название                                         "
-               "         Описание                                  Статус    "
-               "Дата    Приоритет       Категория          Прогресс\n");
+        printf("id            Task name                                      "
+               "      Description                                    Status "
+               "   Date    Priority       Category            Progress\n");
         read_tasks(file[1]);
         printf("\n");
-        printf("1. Удаление дела\n");
-        printf("2. Очистка корзины\n");
-        printf("3. Восстановление дела\n");
-        printf("4. Сортировка\n");
-        printf("5. Выход в главное меню\n");
+        printf("1. Delete task\n");
+        printf("2. Clearing the bin\n");
+        printf("3. Restoring the task\n");
+        printf("4. Exit in main menu\n");
         scanf("%d", &number);
         switch (number) {
         case 1:
-            printf("Введите номер дела: ");
+            printf("Input the task id: ");
             scanf("%d", &id);
+            if (id == 0)
+                clear_stdin();
+            while ((id < 1) || (id > 99)) {
+                printf("Input the correct id: ");
+                id = scanf("%d", &id);
+                if (id == 0)
+                    clear_stdin();
+            }
             delete_task(file, id);
             break;
         case 2:
             clean_bin(file);
             break;
         case 3:
-            printf("Введите номер дела: ");
+            printf("Input the task id: ");
             scanf("%d", &id);
+            if (id == 0)
+                clear_stdin();
+            while ((id < 1) || (id > 99)) {
+                printf("Input the correct id: ");
+                id = scanf("%d", &id);
+                if (id == 0)
+                    clear_stdin();
+            }
             restore_from_bin(file, id);
             break;
         case 4:
             break;
-        case 5:
-            break;
         }
-    } while (number != 5);
+    } while (number != 4);
 }
 
 void delete_task(FILE* file[10], int id)
