@@ -963,7 +963,7 @@ CTEST(cleans, clean_bin)
     fclose(file[1]);
 }
 
-//CTEST(edits, name_edit)
+// CTEST(edits, name_edit)
 //{
 //    task tasks[10];
 //    file[0] = fopen("test/users/test.txt", "w+");
@@ -991,7 +991,7 @@ CTEST(cleans, clean_bin)
 //    fclose(file[0]);
 //}
 
-//CTEST(edits, description_edit)
+// CTEST(edits, description_edit)
 //{
 //    task tasks[10];
 //    file[0] = fopen("test/users/test.txt", "w+");
@@ -1019,7 +1019,7 @@ CTEST(cleans, clean_bin)
 //    fclose(file[0]);
 //}
 
-//CTEST(edits, category_edit)
+// CTEST(edits, category_edit)
 //{
 //    task tasks[10];
 //    file[0] = fopen("test/users/test.txt", "w+");
@@ -1047,7 +1047,7 @@ CTEST(cleans, clean_bin)
 //    fclose(file[0]);
 //}
 
-//CTEST(edits, priority_edit)
+// CTEST(edits, priority_edit)
 //{
 //    task tasks[10];
 //    file[0] = fopen("test/users/test.txt", "w+");
@@ -1075,7 +1075,7 @@ CTEST(cleans, clean_bin)
 //    fclose(file[0]);
 //}
 
-//CTEST(edits, status_edit)
+// CTEST(edits, status_edit)
 //{
 //    task tasks[10];
 //    file[0] = fopen("test/users/test.txt", "w+");
@@ -1100,7 +1100,7 @@ CTEST(cleans, clean_bin)
 //    fclose(file[0]);
 //}
 
-//CTEST(edits, deadline_edit)
+// CTEST(edits, deadline_edit)
 //{
 //    task tasks[10];
 //    file[0] = fopen("test/users/test.txt", "w+");
@@ -1131,7 +1131,7 @@ CTEST(cleans, clean_bin)
 //    fclose(file[0]);
 //}
 
-//CTEST(edits, progress_edit)
+// CTEST(edits, progress_edit)
 //{
 //    task tasks[10];
 //    file[0] = fopen("test/users/test.txt", "w+");
