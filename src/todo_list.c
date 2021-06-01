@@ -79,8 +79,7 @@ int find_id(FILE* file) // Поиск id для нового дела
 void name_edit(task* task1)
 {
     int count = 0;
-    printf("Input the name task*: ");
-    fgetc(stdin);
+    printf("Input the task name*: ");
     fgets(task1->name, 30, stdin);
 
     for (int i = 0; i < 30; i++) {

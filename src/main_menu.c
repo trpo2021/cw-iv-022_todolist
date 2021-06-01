@@ -20,6 +20,7 @@ void todolist(FILE* file[10])
         scanf("%d", &number);
         switch (number) {
         case 1:
+            fgetc(stdin);
             add(file);
             break;
         case 2:
